@@ -18,6 +18,8 @@ public class Projet_Ile_Perdue {
         // TODO code application logic here
         System.out.println("Hello world");
         System.out.println("Hello world");
+                System.out.println("Hello world");
+
     }
     
 }
