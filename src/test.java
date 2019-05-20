@@ -9,6 +9,6 @@ package projet_ile_perdue;
  *
  * @author glandutt
  */
-public class test {
-    
+public class test { 
+    int a;
 }
