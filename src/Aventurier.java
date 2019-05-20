@@ -7,6 +7,7 @@ public abstract class Aventurier {
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
+        private String test;
 
 	/**
 	 * 
