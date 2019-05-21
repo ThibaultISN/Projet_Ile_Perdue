@@ -7,8 +7,11 @@ public abstract class Aventurier {
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
-        private String thibault;
         
+        Aventurier(String nom){
+            setNom(nom);
+            setEnVie(enVie);
+        }
 
 	/**
 	 * 
@@ -102,18 +105,6 @@ public abstract class Aventurier {
         this.enVie = enVie;
     }
 
-    /**
-     * @return the thibault
-     */
-    public String getThibault() {
-        return thibault;
-    }
-
-    /**
-     * @param thibault the thibault to set
-     */
-    public void setThibault(String thibault) {
-        this.thibault = thibault;
-    }
+    
 
 }

@@ -1,5 +1,10 @@
 public class Explotateur extends Aventurier {
-        private String thibault;
+    
+        <CarteTresor> carte;
+	private Tuile emplacement;
+	private String Nom;
+	private int nbAction;
+	private Boolean enVie;
 	/**
 	 * 
 	 * @param tuile
