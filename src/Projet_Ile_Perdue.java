@@ -9,6 +9,15 @@ package projet_ile_perdue;
  *
  * @author glandutt
  */
-public class test {
+public class Projet_Ile_Perdue {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
+        System.out.println("Hello world");
+        
+    }
     
 }

@@ -3,25 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package projet_ile_perdue;
 
 /**
  *
- * @author glandutt
+ * @author remulef
  */
-public class Projet_Ile_Perdue {
+public class NewMain {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Hello world");
-        System.out.println("Hello world");
-                System.out.println("Hello world");
-                                System.out.println("j'ai modifié");
-
-
     }
     
 }
