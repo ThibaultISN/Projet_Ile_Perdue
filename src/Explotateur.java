@@ -1,6 +1,9 @@
+
+import java.util.ArrayList;
+
 public class Explotateur extends Aventurier {
     
-        <CarteTresor> carte;
+        private ArrayList<CarteTresor> main;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
