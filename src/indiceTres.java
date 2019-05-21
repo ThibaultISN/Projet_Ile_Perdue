@@ -1,3 +1,9 @@
+
+
 public class indiceTres extends CarteTresor {
-    private String luca;
+    
+    indiceTres(Trésor tres){
+      setTrésor(tres);
+    }
+    
 }
