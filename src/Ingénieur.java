@@ -1,4 +1,5 @@
 public class Ingénieur extends Aventurier {
+        private String thibault;
 
 	/**
 	 * 

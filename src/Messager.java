@@ -1,4 +1,5 @@
 public class Messager extends Aventurier {
+        private String thibault;
 
 	/**
 	 * 

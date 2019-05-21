@@ -1,4 +1,5 @@
 public class Navigateur extends Aventurier {
+        private String thibault;
 
 	/**
 	 * 

@@ -1,4 +1,5 @@
 public class Pilote extends Aventurier {
+        private String thibault;
 
 	/**
 	 * 

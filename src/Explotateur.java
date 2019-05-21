@@ -1,5 +1,5 @@
 public class Explotateur extends Aventurier {
-
+        private String thibault;
 	/**
 	 * 
 	 * @param tuile
