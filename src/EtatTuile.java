@@ -1,5 +1,5 @@
 public enum EtatTuile {
-        vide,
+        vide, //
 	seche,
         inondé,
         disparue,

@@ -7,6 +7,7 @@ public class Tuile {
 	private Trésor trésor;
         private Position position;
         private EtatTuile etatTuile;
+        
 
 	/**
 	 * 
@@ -32,7 +33,7 @@ public class Tuile {
 	}
         
         public Tuile(Position position) { //Pour les tuiles vide
-		setNom(nom);
+		
                 
                 setPosition(position);
                 
