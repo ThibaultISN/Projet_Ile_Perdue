@@ -115,8 +115,7 @@ public class Grille {
                         ze
                         az
                                 e
-                                aze
-                                        
+azeazeazeazeaz                                        
         // Ajoute les tuiles vides 
         tuiles.add(new Position(0, 0));
         tuiles.add(new Position(0, 1));
