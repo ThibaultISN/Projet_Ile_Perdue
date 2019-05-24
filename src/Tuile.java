@@ -9,7 +9,8 @@ public class Tuile {
     private EtatTuile etatTuile;
 
 
-    /**
+    /** des Abimes|| position : (2,4)
+La Porte de
      *
      * @param nom
      */
@@ -33,7 +34,7 @@ public class Tuile {
     }
 
     public Tuile(Position position) { //Pour les tuiles vide
-        this.nom="Nul";
+        this.setNom("Nul");
         setPosition(position);
 
         etatTuile = EtatTuile.vide;
@@ -104,6 +105,62 @@ public class Tuile {
 
 
 
+    }
+    // Surcharge de méthode pour une position donné en parametre 
+    public boolean estcontigue(Position pos) {
+        
+
+        
+
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
+
+        int parametreX = pos.getX();
+        int parametreY = pos.getY();
+        listconti.add(new Position(parametreX + 1, parametreY));
+        listconti.add(new Position(parametreX, parametreY + 1));
+        listconti.add(new Position(parametreX - 1, parametreY));
+        listconti.add(new Position(parametreX, parametreY - 1));
+
+
+        return (listconti.contains(this.position));
+
+
+
+    }
+    
+    public boolean estdiagonal(Tuile tuile){
+       
+        int paramX = tuile.position.getX();
+        int paramY = tuile.position.getY();
+
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
+        
+        listconti.add(new Position(paramX + 1, paramY + 1));
+        listconti.add(new Position(paramX -1 , paramY + 1));
+        listconti.add(new Position(paramX - 1, paramY +1));
+        listconti.add(new Position(paramX +1, paramY - 1));
+
+
+        return (listconti.contains(this.position));
+        
+    }
+        // Surcharge de méthode pour une position donné en parametre 
+    public boolean estdiagonal(Position pos){
+       
+
+        int paramX = pos.getX();
+        int paramY = pos.getY();
+
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position diagonal de la tuile en parametre
+
+        listconti.add(new Position(paramX + 1, paramY + 1));
+        listconti.add(new Position(paramX -1 , paramY + 1));
+        listconti.add(new Position(paramX - 1, paramY +1));
+        listconti.add(new Position(paramX +1, paramY - 1));
+
+
+        return (listconti.contains(this.position));
+        
     }
 
     public void affiche(){

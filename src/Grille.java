@@ -151,7 +151,7 @@ public class Grille {
 
 
 
-             // Ajoute les tuiles vides
+            /* // Ajoute les tuiles vides
         tuiles.add(new Position(0, 0));
         tuiles.add(new Position(0, 1));
         tuiles.add(new Position(1, 0));
@@ -166,7 +166,29 @@ public class Grille {
 
         tuiles.add(new Position(5, 4));
         tuiles.add(new Position(4, 5));
-        tuiles.add(new Position(5, 5));
+        tuiles.add(new Position(5, 5)); */
+        
+         ArrayList<Position> positionnul = new ArrayList<Position>(); //Liste des positions destiné a etre vide
+
+        positionnul.add(new Position(0, 0));
+        positionnul.add(new Position(0, 1));
+        positionnul.add(new Position(1, 0));
+
+        positionnul.add(new Position(4, 0));
+        positionnul.add(new Position(5, 1));
+        positionnul.add(new Position(5, 0));
+
+        positionnul.add(new Position(0, 4));
+        positionnul.add(new Position(0, 5));
+        positionnul.add(new Position(1, 5));
+
+        positionnul.add(new Position(5, 4));
+        positionnul.add(new Position(4, 5));
+        positionnul.add(new Position(5, 5));
+        
+        for(Position i : positionnul){
+            tuiles.add(new Tuile(i));
+        }
 
 
 
