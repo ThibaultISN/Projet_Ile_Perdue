@@ -8,6 +8,7 @@ public class Tuile {
     private Position position;
     private EtatTuile etatTuile;
 
+
     /**
      *
      * @param nom
@@ -32,7 +33,7 @@ public class Tuile {
     }
 
     public Tuile(Position position) { //Pour les tuiles vide
-
+        this.nom="Nul";
         setPosition(position);
 
         etatTuile = EtatTuile.vide;
@@ -75,7 +76,7 @@ public class Tuile {
     public Position générateurpositionrandom() {
         Position randompos = new Position();
         int Min = 0;
-        int Max = 6;
+        int Max = 5;
 
         randompos.setX(Min + (int) (Math.random() * ((Max - Min) + 1)));
         randompos.setY(Min + (int) (Math.random() * ((Max - Min) + 1)));
@@ -91,19 +92,23 @@ public class Tuile {
         int paramX = tuile.position.getX();
         int paramY = tuile.position.getY();
 
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre 
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
 
         listconti.add(new Position(paramX + 1, paramY));
         listconti.add(new Position(paramX, paramY + 1));
         listconti.add(new Position(paramX - 1, paramY));
         listconti.add(new Position(paramX, paramY - 1));
 
-        
+
         return (listconti.contains(this.position));
 
-    
+
+
+    }
+
+    public void affiche(){
+        System.out.println( this.getNom()+ "|| position : (" + this.position.getX() +","+ this.position.getY()+")" );
+
 
     }
 }
-        
-

@@ -9,7 +9,7 @@ public class Controleur {
 	Echelle echelle;
 
 	/**
-	 * 
+	 *
 	 * @param nomjoueur
 	 * @param cartetrésor
 	 */
@@ -19,7 +19,7 @@ public class Controleur {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param tuile
 	 * @param role
 	 */
@@ -29,7 +29,7 @@ public class Controleur {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param parameter
 	 */
 	public boolean Possibletaketresor(int parameter) {
@@ -38,7 +38,7 @@ public class Controleur {
 	}
 
 	/**
-	 * 
+	 *
 	 * @param joueur
 	 * @param tresor
 	 */
@@ -47,4 +47,24 @@ public class Controleur {
 		throw new UnsupportedOperationException();
 	}
 
+
+        public void ChoixDifficultés(){
+                                Scanner sc = new Scanner(System.in);
+
+            System.out.println ("Quel difficulté voulez vous ? (Novice/Normal/Elite/Legendaire) \n");
+
+            String str = sc.nextLine();
+
+            while(              !"Novice".equals(str) ||!"Normal".equals(str) ||!"Elite".equals(str) ||!"Legendaire".equals(str)  ){
+            System.out.println ("Veuillez saisir une difficulté proposer \n");
+            System.out.println ("Quel difficulté voulez vous ? (Novice/Normal/Elite/Legendaire) \n");
+
+             str = sc.nextLine();
+        }
+
+            Echelle ech = new Echelle(str);
+            System.out.println("La difficulté a été initialisé à " + str +"`\n"
+                    +" Niveau de l'eau :" + ech.getGraduation() + "\n");
+
+        }
 }

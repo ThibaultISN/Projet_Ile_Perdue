@@ -2,18 +2,23 @@ import java.util.*;
 
 public abstract class Aventurier {
 
-	Collection<CarteTresor> carte;
-	Tuile tuiles;
+	private Collection<CarteTresor> cartes;
+	
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
         private String test;
+        private Position pos;
 
 	/**
 	 * 
 	 * @param tuile
 	 */
 	public void seDeplacer(int tuile) {
+		// TODO - implement Aventurier.seDeplacer
+		throw new UnsupportedOperationException();
+	}
+        public void seDeplacer(Position pos) {
 		// TODO - implement Aventurier.seDeplacer
 		throw new UnsupportedOperationException();
 	}

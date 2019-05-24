@@ -4,14 +4,13 @@ import java.util.*;
 public class Grille {
 
     ArrayList tuiles = new ArrayList<Tuile>();
-    
-    Grille(ArrayList tuiles) {
+
+    Grille() {
         setTuiles(tuiles);
-        
-            
+
     }
 
-    //faire une méthode est contigueu 
+    //faire une méthode est contigueu
     public ArrayList getTuiles() {
         return tuiles;
     }
@@ -23,9 +22,9 @@ public class Grille {
     public Position générateurpositionrandom() {
         Position randompos = new Position();
         int Min = 0;
-        int Max = 6;
+        int Max = 5;
 
-        ArrayList<Position> positionnul = new ArrayList<Position>(); //Liste des positions destiné a etre vide 
+        ArrayList<Position> positionnul = new ArrayList<Position>(); //Liste des positions destiné a etre vide
 
         positionnul.add(new Position(0, 0));
         positionnul.add(new Position(0, 1));
@@ -46,26 +45,25 @@ public class Grille {
         randompos.setX(Min + (int) (Math.random() * ((Max - Min) + 1)));
         randompos.setY(Min + (int) (Math.random() * ((Max - Min) + 1)));
 
-        boolean a = positionnul.contains(randompos);
-
-        while (a = true) {  // Tant que la position généré est une case destiné a etre vide généré aléatoire la position
-
+        while ( positionnul.contains(randompos)){
             randompos.setX(Min + (int) (Math.random() * ((Max - Min) + 1)));
             randompos.setY(Min + (int) (Math.random() * ((Max - Min) + 1)));
-            a = positionnul.contains(randompos);
-        }
+            }
+
 
         return randompos;
 
+
+
     }
 
-    public void générationgrille() { 
+    public void générationgrille() {
 
         ArrayList<String> nomtuiles = new ArrayList<String>();
         nomtuiles.add("Le Pont des Abimes");
         nomtuiles.add("La Porte de Bronze");
-        nomtuiles.add("La Caverne des Ombres\"");
-        nomtuiles.add("\"La Porte de Fer\"");
+        nomtuiles.add("La Caverne des Ombres");
+        nomtuiles.add("La Porte de Fer");
         nomtuiles.add("La Porte d’Or");
         nomtuiles.add("Les Falaises de l’Oubli");
         nomtuiles.add("Le Palais de Corail");
@@ -86,37 +84,74 @@ public class Grille {
         nomtuiles.add("Le Val du Crepuscule");
         nomtuiles.add("La Tour du Guet");
         nomtuiles.add("Le Jardin des Murmures");
-        nomtuiles.add("Le Jardin des Murmures");
 
         for (String i : nomtuiles) {
             // while (i < nomtuiles.size()){
-
             ArrayList<Position> positionoccupé = new ArrayList<>(); //Liste des positions non disponible
+            Position pos = générateurpositionrandom(); // génere une position aléatoire
+            //--------------------------------------------
+            boolean param3 = true;
+            // tant que la position généré appartient a la liste des position non dispo regenéré la pos
 
-            Position pos = générateurpositionrandom(); // génere une position aléatoire 
-            boolean b = positionoccupé.contains(pos);
+            while (param3==false){
 
-            while (b = true) {  // Tant que la position généré est une case non disponible  a etre vide généré aléatoire la position
+                 pos = générateurpositionrandom();
+                param3=(positionoccupé.contains(pos));
 
-                pos = générateurpositionrandom();
-                b = positionoccupé.contains(pos);
+
+
+
+                }
+
+            // si la carte correspond a un emplacement trésor utiliser une autre méthode
+             if( "La Caverne des Ombres".equals(i) || "La Caverne du Brasier".equals(i) ){
+                 Trésor Flamme = new Trésor("flamme");
+                 Tuile x = new Tuile(i,Flamme,pos);
+                 tuiles.add(x);
+             }
+             else if( "Le Temple du Soleil".equals(i) || "Le Temple de La Lune".equals(i) ){
+                Trésor Lune = new Trésor("lune");
+                 Tuile x = new Tuile(i,Lune,pos);
+                 tuiles.add(x);//
+            }
+             else if( "Le Jardin des Hurlements".equals(i) || "Le Jardin des Murmures".equals(i) ){
+                Trésor Lion = new Trésor("lion");
+                 Tuile x = new Tuile(i,Lion,pos);
+                 tuiles.add(x);//
+            }
+             else if( "Le Palais de Corail".equals(i) || "Le Palais des Marees".equals(i) ){
+                Trésor Coupe = new Trésor("coupe");
+                 Tuile x = new Tuile(i,Coupe,pos);
+                 tuiles.add(x);//
+            }
+             else {
+                 Tuile x = new Tuile(i,pos);
+                 tuiles.add(x);
+             }
+
+
+            positionoccupé.add(pos); //Cette position n'est désormais plus disponible
+
+
             }
 
-            Tuile x = new Tuile(i, pos); //
-            positionoccupé.add(pos); //Cette position n'est désormais plus disponible
-            tuiles.add(x);
 
-        }
-        
-        azeazeazeaz
-                
-                aze
-                a
-                        ze
-                        az
-                                e
-azeazeazeazeaz                                        
-        // Ajoute les tuiles vides 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+             // Ajoute les tuiles vides
         tuiles.add(new Position(0, 0));
         tuiles.add(new Position(0, 1));
         tuiles.add(new Position(1, 0));
@@ -132,12 +167,14 @@ azeazeazeazeaz
         tuiles.add(new Position(5, 4));
         tuiles.add(new Position(4, 5));
         tuiles.add(new Position(5, 5));
-        
-        
-        
-        
+
+
+
+
+
+
+        }
+
+
 
     }
-    
-  
-}
