@@ -16,5 +16,4 @@ public class CarteInondation extends CarteTresor {
         //piocher le nombre de cartes inondation seln le marqueur de niveau d'eau
         // size(3) --> int niveauEchelle et supprimer les verif nb cartes aventurier
     }
-
 }

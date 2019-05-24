@@ -1,10 +1,10 @@
-public class Trésor {
+public class Tresor {
     
     private Aventurier joueur;
     private boolean estPossede;
     private String nom;
     
-    Trésor(String nom){
+    Tresor(String nom){
         setNom(nom);
     }
 
