@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Grille {
 
-    ArrayList tuiles = new ArrayList<Tuile>();
+    ArrayList<Tuile> tuiles = new ArrayList<Tuile>();
 
     Grille() {
         setTuiles(tuiles);
@@ -196,6 +196,21 @@ public class Grille {
 
 
         }
+    public ArrayList<Tuile> TuileTrésor(Trésor trésor ){
+        ArrayList<Tuile> list = new ArrayList<>();
+        Boolean a;
+        for(Tuile t : tuiles){
+            if (t.getTrésor()==trésor){
+                list.add(t);
+                
+                
+            }
+            
+                   
+
+        }
+        return list;
+    }
 
 
 

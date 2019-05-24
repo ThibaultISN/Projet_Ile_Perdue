@@ -13,6 +13,8 @@ public class Controleur {
 	 * @param nomjoueur
 	 * @param cartetrésor
 	 */
+        
+        //il faut 2 joueurs
 	public boolean PossibleDon(Aventurier nomjoueur, CarteTresor cartetrésor) {
 		// TODO - implement Controleur.PossibleDon
 		throw new UnsupportedOperationException();
@@ -24,18 +26,11 @@ public class Controleur {
 	 * @param role
 	 */
 	public boolean Possibleasseche(Tuile tuile, Aventurier role) {
-		// TODO - implement Controleur.Possibleasseche
+           //voir code de Clément
 		throw new UnsupportedOperationException();
 	}
 
-	/**
-	 *
-	 * @param parameter
-	 */
-	public boolean Possibletaketresor(int parameter) {
-		// TODO - implement Controleur.Possibletaketresor
-		throw new UnsupportedOperationException();
-	}
+	
 
 	/**
 	 *
@@ -43,8 +38,15 @@ public class Controleur {
 	 * @param tresor
 	 */
 	public boolean Possibleprisetrésor(Aventurier joueur, Trésor tresor) {
-		// TODO - implement Controleur.Possibleprisetrésor
-		throw new UnsupportedOperationException();
+           //voir code de Clément
+            
+            for(CarteTresor c : joueur.cartes){
+                if(c.getT() == tresor)
+                
+            }
+            
+            
+		
 	}
 
 

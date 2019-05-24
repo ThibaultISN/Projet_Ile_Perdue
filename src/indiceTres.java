@@ -1,5 +1,6 @@
 public class indiceTres extends CarteTresor {
     public Trésor t;
+    public Aventurier joueur;
 
     public Trésor getT() {
         return t;
