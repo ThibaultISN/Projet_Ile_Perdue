@@ -1,20 +1,25 @@
 
 import java.util.ArrayList;
 
-public class Explotateur extends Aventurier {
+public class Explorateur extends Aventurier {
     
-        private ArrayList<CarteTresor> main;
+        private ArrayList<Carte> main;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
+        
+        Explorateur(String nom){
+            super(nom);
+            setEnVie(true);
+
+        }
 	/**
 	 * 
 	 * @param tuile
 	 */
 	public void assecherDiag(int tuile) {
-		// TODO - implement Explotateur.assecherDiag
-		throw new UnsupportedOperationException();
+		
 	}
 
 	/**
@@ -23,7 +28,6 @@ public class Explotateur extends Aventurier {
 	 */
 	public void deplacerDiag(int tuile) {
 		// TODO - implement Explotateur.deplacerDiag
-		throw new UnsupportedOperationException();
 	}
 
 }

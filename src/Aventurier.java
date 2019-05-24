@@ -2,7 +2,7 @@ import java.util.*;
 
 public abstract class Aventurier {
 
-	Collection<CarteTresor> carte;
+	Collection<Carte> cartes;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -35,7 +35,7 @@ public abstract class Aventurier {
 	 * 
 	 * @param carte
 	 */
-	public void doncarte(CarteTresor carte) {
+	public void doncarte(Carte carte) {
 		// TODO - implement Aventurier.doncarte
 		throw new UnsupportedOperationException();
 	}
@@ -104,6 +104,14 @@ public abstract class Aventurier {
     public void setEnVie(Boolean enVie) {
         this.enVie = enVie;
     }
+    
+    public void addCarte(Carte carte){
+        
+        if(cartes.size() > 5)
+           
+           cartes.add(carte);}
+    
+    
 
     
 

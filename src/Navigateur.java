@@ -1,6 +1,18 @@
-public class Navigateur extends Aventurier {
-        private String thibault;
+import java.util.*;
 
+public class Navigateur extends Aventurier {
+        
+        Collection<Carte> carte;
+	private Tuile emplacement;
+	private String Nom;
+	private int nbAction;
+	private Boolean enVie;
+        
+        Navigateur(String nom){
+            super(nom);
+            setEnVie(true);
+
+        }
 	/**
 	 * 
 	 * @param tuile
