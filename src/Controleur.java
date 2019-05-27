@@ -8,6 +8,7 @@ public class Controleur {
     Collection<CarteTresor> cartes;
     Collection<CarteInondation> cartesinnond;
     Echelle echelle;
+    int a;
 
     /**
      *
