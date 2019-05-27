@@ -6,7 +6,7 @@ public class CarteTresor {
     private Trésor t;
 
     public void Piocher() {
-        
+        // modif
         if (Controleur.cartes.size() == 0){
             Controleur.cartes = Controleur.cartesD;
             Collections.shuffle(Controleur.cartes);
