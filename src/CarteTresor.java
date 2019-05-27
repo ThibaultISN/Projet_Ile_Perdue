@@ -6,7 +6,7 @@ public class CarteTresor {
     private Trésor t;
 
     public void Piocher() {
-        // Controleur à instancier avant d'appeler les variables
+        
         if (Controleur.cartes.size() == 0){
             Controleur.cartes = Controleur.cartesD;
             Collections.shuffle(Controleur.cartes);
