@@ -35,7 +35,7 @@ public abstract class Aventurier {
 	 * 
 	 * @param carte
 	 */
-	public void doncarte(Carte carte) {
+	public void doncarte(CarteTresor carte) {
 		// TODO - implement Aventurier.doncarte
 		throw new UnsupportedOperationException();
 	}
@@ -107,7 +107,7 @@ public abstract class Aventurier {
         this.enVie = enVie;
     }
     
-    public void addCarte(Carte carte){
+    public void addCarte(CarteTresor carte){
         
         if(cartes.size() > 5)
            
