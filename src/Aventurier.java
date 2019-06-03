@@ -2,7 +2,11 @@ import java.util.*;
 
 public abstract class Aventurier {
 
+
+
+
 	Collection<CarteTresor> cartes;
+
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -35,7 +39,7 @@ public abstract class Aventurier {
 	 * 
 	 * @param carte
 	 */
-	public void doncarte(Carte carte) {
+	public void doncarte(CarteTresor carte) {
 		// TODO - implement Aventurier.doncarte
 		throw new UnsupportedOperationException();
 	}
@@ -44,7 +48,7 @@ public abstract class Aventurier {
 	 * Mettre en parametre le trésor et ajouter le trésor dans la liste de trésor du joueur et l'enlever des trésors disponible
 	 * @param trésor
 	 */
-	public void prendretrésor(Trésor trésor) {
+	public void prendretrésor(Tresor trésor) {
 		// TODO - implement Aventurier.prendretrésor
 		throw new UnsupportedOperationException();
 	}
@@ -107,7 +111,7 @@ public abstract class Aventurier {
         this.enVie = enVie;
     }
     
-    public void addCarte(Carte carte){
+    public void addCarte(CarteTresor carte){
         
         if(cartes.size() > 5)
            
@@ -119,4 +123,3 @@ public abstract class Aventurier {
 
 }
 
- 

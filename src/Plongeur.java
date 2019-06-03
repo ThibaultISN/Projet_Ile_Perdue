@@ -1,24 +1,21 @@
-
 import java.util.*;
 
-public class Ingénieur extends Aventurier {
-    
-        Collection<CarteTresor> carte;
+
+public class Plongeur extends Aventurier {
+
+        Collection<Carte> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
         
-        Ingénieur(String nom){
+        
+        Plongeur(String nom){
             super(nom);
             setEnVie(true);
         }
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void assecherT(int tuile) {
-		// TODO - implement Ingénieur.assecherT
+	public void plonger() {
+		// TODO - implement Plonguer.plonger
 		throw new UnsupportedOperationException();
 	}
 
