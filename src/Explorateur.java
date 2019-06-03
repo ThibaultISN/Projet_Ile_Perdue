@@ -7,27 +7,13 @@ public class Explorateur extends Aventurier {
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
+       
         
-        Explorateur(String nom){
-            super(nom);
-            setEnVie(true);
-
+        Explorateur(){
+           
         }
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void assecherDiag(Tuile tuile) {
-		tuile.setEtatTuile(EtatTuile.seche);
-	}
-
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void deplacerDiag(Tuile tuile) {
-		// TODO - implement Explotateur.deplacerDiag
-                setEmplacement(tuile);
-	}
+        
+       
+	
 
 }

@@ -105,22 +105,22 @@ public class Grille {
 
             // si la carte correspond a un emplacement trésor utiliser une autre méthode
              if( "La Caverne des Ombres".equals(i) || "La Caverne du Brasier".equals(i) ){
-                 Trésor Flamme = new Trésor("flamme");
+                 Tresor Flamme = new Tresor("flamme");
                  Tuile x = new Tuile(i,Flamme,pos);
                  tuiles.add(x);
              }
              else if( "Le Temple du Soleil".equals(i) || "Le Temple de La Lune".equals(i) ){
-                Trésor Lune = new Trésor("lune");
+                Tresor Lune = new Tresor("lune");
                  Tuile x = new Tuile(i,Lune,pos);
                  tuiles.add(x);//
             }
              else if( "Le Jardin des Hurlements".equals(i) || "Le Jardin des Murmures".equals(i) ){
-                Trésor Lion = new Trésor("lion");
+                Tresor Lion = new Tresor("lion");
                  Tuile x = new Tuile(i,Lion,pos);
                  tuiles.add(x);//
             }
              else if( "Le Palais de Corail".equals(i) || "Le Palais des Marees".equals(i) ){
-                Trésor Coupe = new Trésor("coupe");
+                Tresor Coupe = new Tresor("coupe");
                  Tuile x = new Tuile(i,Coupe,pos);
                  tuiles.add(x);//
             }
@@ -196,7 +196,7 @@ public class Grille {
 
 
         }
-    public ArrayList<Tuile> TuileTrésor(Trésor trésor ){
+    public ArrayList<Tuile> TuileTresor(Tresor trésor ){
         ArrayList<Tuile> list = new ArrayList<>();
         Boolean a;
         for(Tuile t : tuiles){
@@ -210,6 +210,15 @@ public class Grille {
 
         }
         return list;
+    }
+    
+    public int numTuile(String nom){
+        int i = 0;
+        ArrayList<Tuile> liste = getTuiles();
+        while( i < liste.size() && liste.get(i).getNom()!= nom){
+        i = i+1;
+    }
+     return  i;         
     }
 
 

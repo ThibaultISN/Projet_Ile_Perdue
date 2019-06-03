@@ -11,9 +11,8 @@ public class Pilote extends Aventurier {
 	private int nbAction;
 	private Boolean enVie;
         
-        Pilote(String nom){
-            super(nom);
-            setEnVie(true);
+        Pilote(){
+            
         }
 	/**
 	 * 

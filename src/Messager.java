@@ -12,6 +12,10 @@ public class Messager extends Aventurier {
             super(nom);
             setEnVie(true);
         }
+        
+        Messager(){
+            
+        }
 	/**
 	 * 
 	 * @param carte

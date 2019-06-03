@@ -13,6 +13,10 @@ public class Navigateur extends Aventurier {
             setEnVie(true);
 
         }
+        
+         Navigateur( ){
+           
+        }
 	/**
 	 * 
 	 * @param tuile

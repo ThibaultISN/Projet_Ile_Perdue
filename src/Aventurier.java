@@ -2,64 +2,45 @@ import java.util.*;
 
 public abstract class Aventurier {
 
-	Collection<CarteTresor> cartes;
+	ArrayList<CarteTresor> cartes = new ArrayList<>();
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
-        private Tresor tresor;
+        private Collection<Tresor> tresor = new ArrayList<>();
+         private String role;
         
         Aventurier(String nom){
             setNom(nom);
-            setEnVie(enVie);
+           
+        }
+        Aventurier(){
+           
+           
         }
 
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void seDeplacer(Tuile tuile) {
-		// TODO - implement Aventurier.seDeplacer
-                if(emplacement.estCollee(tuile)){
-                    setEmplacement(tuile);
-                }
-        }
+    public Collection<Tresor> getTresor() {
+        return tresor;
+    }
 
-	/**
-	 * 
-	 * @param tuile
-	 */
-	public void assécher(Tuile tuile) {
-		// TODO - implement Aventurier.assécher
-                if(emplacement.estCollee(tuile)){
-                    tuile.setEtat("sec");
-                }
-        }
+    public void setTresor(Collection<Tresor> tresor) {
+        this.tresor = tresor;
+    }
 
-	/**
-	 * 
-	 * @param carte
-	 */
-	public void doncarte(CarteTresor carte, Aventurier joueur) {
-		// TODO - implement Aventurier.doncarte
-            if(joueur.emplacement.estCollee(emplacement)){
-                joueur.addCarte(carte);
-                cartes.remove(carte);
-            }
-        }
+    public Collection<CarteTresor> getCartes() {
+        return cartes;
+    }
 
-	/**
-	 * Mettre en parametre le trésor et ajouter le trésor dans la liste de trésor du joueur et l'enlever des trésors disponible
-	 * @param trésor
-	 */
-	public void prendretrésor(Tresor trésor) {
-		// TODO - implement Aventurier.prendretrésor
-                if((getEmplacement() == possede 4 cartetrésor){
-                    cartes.remove(cartetresor)*4;
-                    setTresor(trésor);
-                    
-        }
-        }
+    
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
 
     /**
      * @return the emplacement
@@ -122,23 +103,42 @@ public abstract class Aventurier {
         if(cartes.size() > 5)
            
            cartes.add(carte);}
+    
+     public void addTresor(Tresor tres){
+        tresor.add(tres);
+        
 
     /**
      * @return the tresor
      */
-    public Tresor getTresor() {
-        return tresor;
+   
+    
+     
+    
+    
+
+    
+
+}
+     public boolean estcontigue(Tuile tuile) {
+        Position pos = this.getEmplacement().getPosition();
+        Position param = tuile.getPosition();
+
+        int paramX = tuile.getPosition().getX();
+        int paramY = tuile.getPosition().getY();
+
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
+
+        listconti.add(new Position(paramX + 1, paramY));
+        listconti.add(new Position(paramX, paramY + 1));
+        listconti.add(new Position(paramX - 1, paramY));
+        listconti.add(new Position(paramX, paramY - 1));
+
+
+        return (listconti.contains(this.getEmplacement()));
+
+
+
     }
-
-    /**
-     * @param tresor the tresor to set
-     */
-    public void setTresor(Tresor tresor) {
-        this.tresor = tresor;
-    }
-    
-    
-
-    
-
+     
 }

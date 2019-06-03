@@ -14,6 +14,10 @@ public class Plongeur extends Aventurier {
             super(nom);
             setEnVie(true);
         }
+        
+         public Plongeur(){
+        
+        }
 	public void plonger(Tuile tuile) {
 		// TODO - implement Plonguer.plonger
                 setEmplacement(tuile);

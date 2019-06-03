@@ -3,9 +3,9 @@ import java.util.Collection;
 public class CarteTresor {
 
     private Aventurier joueur;
-    private Trésor t;
+    private Tresor t;
 
-    public void Piocher() {
+    /*public void Piocher() {
         // modif
         if (Controleur.cartes.size() == 0){
             Controleur.cartes = Controleur.cartesD;
@@ -29,7 +29,7 @@ public class CarteTresor {
 
         }
 
-    }
+    } */
     
     public void Défausser(){
         
@@ -43,11 +43,11 @@ public class CarteTresor {
         this.joueur = joueur;
     }
 
-    public Trésor getT() {
+    public Tresor getT() {
         return t;
     }
 
-    public void setT(Trésor t) {
+    public void setT(Tresor t) {
         this.t = t;
     }
     
