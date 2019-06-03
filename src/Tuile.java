@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Tuile {
 
     private String nom;
-    private Trésor trésor;
+    private Tresor trésor;
     private Position position;
     private EtatTuile etatTuile;
 
@@ -14,7 +14,7 @@ La Porte de
      *
      * @param nom
      */
-    public Tuile(String nom, Trésor trésor, Position position) { //Pour les tuiles disposant d'un trésor
+    public Tuile(String nom, Tresor trésor, Position position) { //Pour les tuiles disposant d'un trésor
         setNom(nom);
         setTrésor(trésor);
         setPosition(position);
@@ -58,11 +58,11 @@ La Porte de
         this.nom = nom;
     }
 
-    public Trésor getTrésor() {
+    public Tresor getTrésor() {
         return trésor;
     }
 
-    public void setTrésor(Trésor trésor) {
+    public void setTrésor(Tresor trésor) {
         this.trésor = trésor;
     }
 
