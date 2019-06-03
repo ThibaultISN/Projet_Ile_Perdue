@@ -4,7 +4,7 @@ import java.util.*;
 public class Pilote extends Aventurier {
         private String thibault;
         
-        Collection<Carte> carte;
+        Collection<CarteTrésor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;

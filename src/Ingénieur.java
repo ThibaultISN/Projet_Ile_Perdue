@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Ingénieur extends Aventurier {
     
-        Collection<Carte> carte;
+        Collection<CarteTrésor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;

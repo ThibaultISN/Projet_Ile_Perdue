@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Navigateur extends Aventurier {
         
-        Collection<Carte> carte;
+        Collection<CarteTrésor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
