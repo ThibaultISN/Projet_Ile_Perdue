@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Explorateur extends Aventurier {
     
-        private ArrayList<Carte> main;
+        private ArrayList<CarteTrésor> main;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
