@@ -1,12 +1,12 @@
 public class indiceTres extends CarteTresor {
-    public Trésor t;
+    public Tresor t;
     public Aventurier joueur;
 
-    public Trésor getT() {
+    public Tresor getT() {
         return t;
     }
 
-    public void setT(Trésor t) {
+    public void setT(Tresor t) {
         this.t = t;
     }
 
