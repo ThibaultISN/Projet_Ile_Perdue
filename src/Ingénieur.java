@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Ingénieur extends Aventurier {
     
-        Collection<CarteTresor> carte;
+        Collection<Carte> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -17,9 +17,9 @@ public class Ingénieur extends Aventurier {
 	 * 
 	 * @param tuile
 	 */
-	public void assecherT(int tuile) {
+	public void assecherT(Tuile tuile) {
 		// TODO - implement Ingénieur.assecherT
-		throw new UnsupportedOperationException();
-	}
+                setEmplacement(tuile);
+        }
 
 }

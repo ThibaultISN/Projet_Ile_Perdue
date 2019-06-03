@@ -7,6 +7,7 @@ public abstract class Aventurier {
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
+        private Trésor tresor;
         
         Aventurier(String nom){
             setNom(nom);
@@ -17,28 +18,35 @@ public abstract class Aventurier {
 	 * 
 	 * @param tuile
 	 */
-	public void seDeplacer(int tuile) {
+	public void seDeplacer(Tuile tuile) {
 		// TODO - implement Aventurier.seDeplacer
-		throw new UnsupportedOperationException();
-	}
+                if(emplacement.estCollee(tuile)){
+                    setEmplacement(tuile);
+                }
+        }
 
 	/**
 	 * 
 	 * @param tuile
 	 */
-	public void assécher(int tuile) {
+	public void assécher(Tuile tuile) {
 		// TODO - implement Aventurier.assécher
-		throw new UnsupportedOperationException();
-	}
+                if(emplacement.estCollee(tuile)){
+                    tuile.setEtat("sec");
+                }
+        }
 
 	/**
 	 * 
 	 * @param carte
 	 */
-	public void doncarte(Carte carte) {
+	public void doncarte(Carte carte, Aventurier joueur) {
 		// TODO - implement Aventurier.doncarte
-		throw new UnsupportedOperationException();
-	}
+            if(joueur.emplacement.estCollee(emplacement)){
+                joueur.addCarte(carte);
+                cartes.remove(carte);
+            }
+        }
 
 	/**
 	 * Mettre en parametre le trésor et ajouter le trésor dans la liste de trésor du joueur et l'enlever des trésors disponible
@@ -46,8 +54,12 @@ public abstract class Aventurier {
 	 */
 	public void prendretrésor(Trésor trésor) {
 		// TODO - implement Aventurier.prendretrésor
-		throw new UnsupportedOperationException();
-	}
+                if((getEmplacement() == possede 4 cartetrésor){
+                    cartes.remove(cartetresor)*4;
+                    setTresor(trésor);
+                    
+        }
+        }
 
     /**
      * @return the emplacement
@@ -110,6 +122,20 @@ public abstract class Aventurier {
         if(cartes.size() > 5)
            
            cartes.add(carte);}
+
+    /**
+     * @return the tresor
+     */
+    public Trésor getTresor() {
+        return tresor;
+    }
+
+    /**
+     * @param tresor the tresor to set
+     */
+    public void setTresor(Trésor tresor) {
+        this.tresor = tresor;
+    }
     
     
 

@@ -14,9 +14,9 @@ public class Plongeur extends Aventurier {
             super(nom);
             setEnVie(true);
         }
-	public void plonger() {
+	public void plonger(Tuile tuile) {
 		// TODO - implement Plonguer.plonger
-		throw new UnsupportedOperationException();
-	}
+                setEmplacement(tuile);
+        }
 
 }
