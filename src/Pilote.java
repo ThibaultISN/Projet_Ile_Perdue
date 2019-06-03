@@ -1,10 +1,11 @@
+
 import java.util.*;
 
 
 public class Pilote extends Aventurier {
         private String thibault;
         
-        Collection<Carte> carte;
+        Collection<CarteTresor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -18,9 +19,9 @@ public class Pilote extends Aventurier {
 	 * 
 	 * @param tuile
 	 */
-	public void téléportation(int tuile) {
+	public void téléportation(Tuile tuile) {
 		// TODO - implement Pilote.téléportation
-		throw new UnsupportedOperationException();
-	}
+                setEmplacement(tuile);
+        }
 
 }

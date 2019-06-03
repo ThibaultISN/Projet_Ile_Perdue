@@ -59,7 +59,7 @@ public class Controleur {
      * @param joueur
      * @param tresor
      */
-    public boolean Possibleprisetrésor(Aventurier joueur, Trésor tresor) {
+    public boolean Possibleprisetrésor(Aventurier joueur, Tresor tresor) {
         // TODO - implement Controleur.Possibleprisetrésor
 
         for (CarteTresor c : joueur.cartes) {

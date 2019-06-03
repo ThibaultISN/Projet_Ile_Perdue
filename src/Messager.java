@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Messager extends Aventurier {
         
-        Collection<Carte> carte;
+        Collection<CarteTresor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -16,7 +16,7 @@ public class Messager extends Aventurier {
 	 * 
 	 * @param carte
 	 */
-	public void donnerCarte(Carte carte, Aventurier joueur) {
+	public void donnerCarte(CarteTresor carte, Aventurier joueur) {
 		// TODO - implement Messager.donnerCarte
                 joueur.addCarte(carte);
 	}

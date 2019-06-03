@@ -1,9 +1,8 @@
-
 import java.util.ArrayList;
 
 public class Explorateur extends Aventurier {
     
-        private ArrayList<Carte> main;
+        private ArrayList<CarteTresor> main;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -18,16 +17,17 @@ public class Explorateur extends Aventurier {
 	 * 
 	 * @param tuile
 	 */
-	public void assecherDiag(int tuile) {
-		
+	public void assecherDiag(Tuile tuile) {
+		tuile.setEtatTuile(EtatTuile.seche);
 	}
 
 	/**
 	 * 
 	 * @param tuile
 	 */
-	public void deplacerDiag(int tuile) {
+	public void deplacerDiag(Tuile tuile) {
 		// TODO - implement Explotateur.deplacerDiag
+                setEmplacement(tuile);
 	}
 
 }

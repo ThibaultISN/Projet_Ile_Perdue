@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Navigateur extends Aventurier {
         
-        Collection<Carte> carte;
+        Collection<CarteTresor> carte;
 	private Tuile emplacement;
 	private String Nom;
 	private int nbAction;
@@ -17,9 +17,10 @@ public class Navigateur extends Aventurier {
 	 * 
 	 * @param tuile
 	 */
-	public void deplacerJ(int tuile) {
+	public void deplacerJ(Tuile tuile, Aventurier joueur) {
 		// TODO - implement Navigateur.deplacerJ
-		throw new UnsupportedOperationException();
-	}
+            joueur.setEmplacement(tuile);
+        }
 
 }
+
