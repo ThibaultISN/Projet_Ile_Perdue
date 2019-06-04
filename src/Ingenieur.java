@@ -15,6 +15,7 @@ public class Ingenieur extends Aventurier {
         }
         
          Ingenieur(){
+             super.setRole("Ingenieur");
              
             
         }

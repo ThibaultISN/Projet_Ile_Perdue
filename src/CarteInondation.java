@@ -1,10 +1,14 @@
 
-public class CarteInondation extends CarteTresor {
+public class CarteInondation {
 
     private Tuile tuile;
 
     CarteInondation(Tuile tuile) {
         setTuile(tuile);
+    }
+
+    public Tuile getTuile() {
+        return tuile;
     }
 
     public void setTuile(Tuile tuile) {

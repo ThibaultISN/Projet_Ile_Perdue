@@ -10,7 +10,7 @@ public class Explorateur extends Aventurier {
        
         
         Explorateur(){
-           
+            super.setRole("Explorateur");
         }
         
        

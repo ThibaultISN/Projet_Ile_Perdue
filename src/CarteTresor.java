@@ -4,6 +4,30 @@ public class CarteTresor {
 
     private Aventurier joueur;
     private Tresor t;
+    private String type;
+
+    public CarteTresor(Tresor t) {
+        this.t = t;
+        this.type=t.getNom();
+        
+    }
+    
+     public CarteTresor(String type) {
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+   
+    
+    
+    
 
     /*public void Piocher() {
         // modif
@@ -49,6 +73,10 @@ public class CarteTresor {
 
     public void setT(Tresor t) {
         this.t = t;
+    }
+    
+    public void afficher(){
+         System.out.println(this.type+" ");
     }
     
     

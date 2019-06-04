@@ -14,7 +14,7 @@ public class Messager extends Aventurier {
         }
         
         Messager(){
-            
+            super.setRole("Messager");
         }
 	/**
 	 * 

@@ -20,13 +20,14 @@ public class testgénératiodestuiles {
         // TODO code application logic here
         Grille g = new Grille();
         g.générationgrille();
+        ArrayList<Tuile> l = g.tuiles;
         
         
         for(Tuile t : l ){
             t.affiche();
         }
         
-        a.affiche();
+        
         
         
         

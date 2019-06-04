@@ -108,18 +108,24 @@ public abstract class Aventurier {
         tresor.add(tres);
         
 
-    /**
-     * @return the tresor
-     */
-   
-    
-     
-    
-    
-
-    
 
 }
+     public void afficherCarte(){
+     for(CarteTresor c : this.cartes){
+         c.afficher();
+     }   
+    }
+     
+     public int numcarte(String nom){
+        int i = 0;
+        ArrayList<CarteTresor> liste = cartes;
+        while( i < liste.size() && liste.get(i).getType()!= nom){
+        i = i+1;
+    }
+            return i;
+     }
+     
+     
      public boolean estcontigue(Tuile tuile) {
         Position pos = this.getEmplacement().getPosition();
         Position param = tuile.getPosition();
@@ -139,6 +145,26 @@ public abstract class Aventurier {
 
 
 
+    }
+     
+      public boolean estdiagonal(Tuile tuile){
+       
+       Position pos = this.getEmplacement().getPosition();
+        Position param = tuile.getPosition();
+
+        int paramX = tuile.getPosition().getX();
+        int paramY = tuile.getPosition().getY();
+
+        ArrayList<Position> listconti = new ArrayList<>();
+        
+        listconti.add(new Position(paramX + 1, paramY + 1));
+        listconti.add(new Position(paramX -1 , paramY + 1));
+        listconti.add(new Position(paramX - 1, paramY +1));
+        listconti.add(new Position(paramX +1, paramY - 1));
+
+
+        return (listconti.contains(this.getEmplacement()));
+        
     }
      
 }

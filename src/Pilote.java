@@ -12,7 +12,7 @@ public class Pilote extends Aventurier {
 	private Boolean enVie;
         
         Pilote(){
-            
+            super.setRole("Pilote");
         }
 	/**
 	 * 

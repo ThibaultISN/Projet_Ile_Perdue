@@ -220,6 +220,16 @@ public class Grille {
     }
      return  i;         
     }
+    
+    public ArrayList<Tuile> tuilenonvide(){
+        ArrayList<Tuile> list = new ArrayList<>();
+        for( Tuile t : tuiles){
+            if(t.getNom()!="Nul"){
+                list.add(t);
+            }
+        }
+        return list;
+    }
 
 
 

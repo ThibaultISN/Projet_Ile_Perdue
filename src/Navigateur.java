@@ -15,7 +15,7 @@ public class Navigateur extends Aventurier {
         }
         
          Navigateur( ){
-           
+           super.setRole("Navigateur");
         }
 	/**
 	 * 

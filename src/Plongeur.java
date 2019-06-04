@@ -16,7 +16,7 @@ public class Plongeur extends Aventurier {
         }
         
          public Plongeur(){
-        
+         super.setRole("Plongeur");
         }
 	public void plonger(Tuile tuile) {
 		// TODO - implement Plonguer.plonger
