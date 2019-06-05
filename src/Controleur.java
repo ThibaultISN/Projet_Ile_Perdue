@@ -60,13 +60,13 @@ public class Controleur {
     public boolean Possibleasseche(Tuile tuile, Aventurier x) {
         // TODO - implement Controleur.Possibleasseche
         if (x.getRole() == "Explorateur") {
-            if ((x.estcontigue(tuile) || x.estcontigue(tuile)) && tuile.getEtatTuile() == EtatTuile.inondé) {
+            if ((tuile.estcontigue(x) || tuile.estcontigue(x)) && tuile.getEtatTuile() == EtatTuile.inondé) {
                 return true;
             } else {
                 return false;
             }
         } else {
-            if (x.estcontigue(tuile) && tuile.getEtatTuile() == EtatTuile.inondé) {
+            if (tuile.estcontigue(x) && tuile.getEtatTuile() == EtatTuile.inondé) {
                 return true;
             } else {
                 return false;
@@ -249,7 +249,9 @@ public void attributioncart(){
 }
     
      public void Carteterraingen(){
-       for(Tuile t : grille.tuilenonvide() ){
+         ArrayList<Tuile> li = getGrille().getTuiles();
+       for(Tuile t : li  )
+           if(t.getNom() != "Null"){
            cartesinnond= new ArrayList<>();
            this.cartesinnond.add(new CarteInondation(t));
        }
@@ -282,13 +284,22 @@ public void attributioncart(){
     
     public ArrayList<Tuile> tuilepossibledep(Aventurier av){
         ArrayList<Tuile> l = new ArrayList<>();
-        for(Tuile t : grille.tuiles){
-            if(av.estcontigue(t)){
+         ArrayList<Tuile> la = this.getGrille().getTuiles();
+         ArrayList<Tuile> le = new ArrayList<>();
+         
+        for(Tuile t : la ){
+            if(t.estcontigue(av) && t.getNom() != "Null"){
                 l.add(t);
                 
             }
         }
         return l;
+    }
+    
+    public void affichetuilepossibledep(Aventurier av){
+        for(Tuile t : tuilepossibledep(av)){
+            t.affiche();
+        }
     }
     
     public void afficherJoueur(){

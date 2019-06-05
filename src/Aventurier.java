@@ -126,26 +126,12 @@ public abstract class Aventurier {
      }
      
      
-     public boolean estcontigue(Tuile tuile) {
-        Position pos = this.getEmplacement().getPosition();
-        Position param = tuile.getPosition();
+     /*public boolean estcontigue(Tuile tuile) {
+       Tuile tuilejoueur =this.getEmplacement();
+       
+       if(tuilejoueur.getPosition().isEqual
 
-        int paramX = tuile.getPosition().getX();
-        int paramY = tuile.getPosition().getY();
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
-
-        listconti.add(new Position(paramX + 1, paramY));
-        listconti.add(new Position(paramX, paramY + 1));
-        listconti.add(new Position(paramX - 1, paramY));
-        listconti.add(new Position(paramX, paramY - 1));
-
-
-        return (listconti.contains(this.getEmplacement()));
-
-
-
-    }
+    }*/
      
       public boolean estdiagonal(Tuile tuile){
        

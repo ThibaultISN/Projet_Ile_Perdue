@@ -86,12 +86,12 @@ La Porte de
 
     }
 
-    public boolean estcontigue(Tuile tuile) {
-        Position pos = this.position;
-        Position param = tuile.position;
+    public boolean estcontigue(Aventurier av) {
+       
+        
 
-        int paramX = tuile.position.getX();
-        int paramY = tuile.position.getY();
+        /*int paramX = tuile.getPosition().getX();
+        int paramY = tuile.getPosition().getY();
 
         ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
 
@@ -101,11 +101,42 @@ La Porte de
         listconti.add(new Position(paramX, paramY - 1));
 
 
-        return (listconti.contains(this.position));
+        return (listconti.contains(this.getPosition()));*/
+
+        return (((av.getEmplacement().getPosition().getX() == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() + 1))) ||
+                ((av.getEmplacement().getPosition().getX() == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() - 1))) ||
+                (((av.getEmplacement().getPosition().getX() + 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY())) ||
+                (((av.getEmplacement().getPosition().getX() - 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()))
+                );
+
+        }
+    
+    
+    
+    public boolean estdiagonal(Aventurier av) {
+       
+        
+
+        /*int paramX = tuile.getPosition().getX();
+        int paramY = tuile.getPosition().getY();
+
+        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
+
+        listconti.add(new Position(paramX + 1, paramY));
+        listconti.add(new Position(paramX, paramY + 1));
+        listconti.add(new Position(paramX - 1, paramY));
+        listconti.add(new Position(paramX, paramY - 1));
 
 
+        return (listconti.contains(this.getPosition()));*/
 
-    }
+        return (((av.getEmplacement().getPosition().getX()+1 == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() + 1))) ||
+                ((av.getEmplacement().getPosition().getX()-1 == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() - 1))) ||
+                (((av.getEmplacement().getPosition().getX() + 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()+1)) ||
+                (((av.getEmplacement().getPosition().getX() - 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()-1))
+                );
+
+        }
     // Surcharge de méthode pour une position donné en parametre 
     public boolean estcontigue(Position pos) {
         
@@ -116,6 +147,7 @@ La Porte de
 
         int parametreX = pos.getX();
         int parametreY = pos.getY();
+        
         listconti.add(new Position(parametreX + 1, parametreY));
         listconti.add(new Position(parametreX, parametreY + 1));
         listconti.add(new Position(parametreX - 1, parametreY));

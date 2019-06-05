@@ -132,24 +132,24 @@ public class Lejeu {
         switch (difficulte) {
             case 1:
                 controleur.setEchelle(new Echelle("Novice"));
-                System.out.println("Vous avez choisit Novice");
+                System.out.println("Vous avez choisit Novice\n");
                 break;
             case 2:
                 controleur.setEchelle(new Echelle("Normal"));
-                System.out.println("Vous avez choisit Normal");
+                System.out.println("Vous avez choisit Normal\n");
                 break;
             case 3:
                 controleur.setEchelle(new Echelle("Elite"));
-                System.out.println("Vous avez choisit Elite");
+                System.out.println("Vous avez choisit Elite\n");
                 break;
             case 4:
                 controleur.setEchelle(new Echelle("Legendaire"));
-                System.out.println("Vous avez choisit Legendaire");
+                System.out.println("Vous avez choisit Legendaire\n");
                 break;
 
         }
 
-        System.out.println("LA PARTIE VA DEBUTE");
+        System.out.println("LA PARTIE VA DEBUTE\n");
         System.out.println(controleur.getJoueurs().size());
 
         while (true) {
@@ -185,12 +185,13 @@ public class Lejeu {
                     switch(numact){
                         case 1: av.afficherCarte(); break; 
                         case 2:
-                             System.out.println("Vous pouvez aller sur ces case");
-                            for(Tuile t : controleur.tuilepossibledep(av)){
-                            t.affiche();
-                        }   
+                             System.out.println("Vous pouvez aller sur ces cases");
+                            //for(Tuile t : controleur.tuilepossibledep(av)){
+                            //t.affiche();
+                       // }   
+                             controleur.affichetuilepossibledep(av);
                             sc = new Scanner(System.in);
-                            System.out.println("Saisir le nom de la tuile destination (Bien saisir le nom de la tuile ");
+                            System.out.println("Saisir le nom de la tuile destination (Bien saisir le nom de la tuile) ");
                             String tui = sc.nextLine();
                             int index = controleur.grille.numTuile(tui);
                             av.setEmplacement(controleur.grille.tuiles.get(index));
@@ -220,6 +221,7 @@ public class Lejeu {
                              System.out.println("Vous pouvez assechez sur ces case");
                             for(Tuile t : controleur.tuileassechable(av)){
                             t.affiche();
+                                    
                         }   
                             sc = new Scanner(System.in);
                             System.out.println("Saisir le nom de la tuile destination (Bien saisir le nom de la tuile ");
@@ -240,6 +242,7 @@ public class Lejeu {
                             else {
                                 nbaction=nbaction+1;
                             }
+                            
                             
                            
                             break;
