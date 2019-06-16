@@ -9,8 +9,8 @@ public class Messager extends Aventurier {
 	private Boolean enVie;
         
         Messager(String nom){
-            super(nom);
-            setEnVie(true);
+            super.setNom(nom);
+            super.setRole("Messager");
         }
         
         Messager(){

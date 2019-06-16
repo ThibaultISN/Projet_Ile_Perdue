@@ -9,13 +9,13 @@ public class Navigateur extends Aventurier {
 	private Boolean enVie;
         
         Navigateur(String nom){
-            super(nom);
-            setEnVie(true);
+            super.setNom(nom);
+            super.setRole("Navigateur");
 
         }
         
          Navigateur( ){
-           super.setRole("Navigateur");
+           
         }
 	/**
 	 * 

@@ -8,11 +8,19 @@ public class Plongeur extends Aventurier {
 	private String Nom;
 	private int nbAction;
 	private Boolean enVie;
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public void setNom(String Nom) {
+        this.Nom = Nom;
+    }
         
         
         Plongeur(String nom){
-            super(nom);
-            setEnVie(true);
+            super.setNom(nom);
+            super.setRole("Plongeur");
         }
         
          public Plongeur(){

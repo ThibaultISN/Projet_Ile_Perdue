@@ -11,8 +11,9 @@ public class Pilote extends Aventurier {
 	private int nbAction;
 	private Boolean enVie;
         
-        Pilote(){
+        Pilote(String nom){
             super.setRole("Pilote");
+            super.setNom(nom);
         }
 	/**
 	 * 

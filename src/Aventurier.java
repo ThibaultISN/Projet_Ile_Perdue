@@ -9,6 +9,15 @@ public abstract class Aventurier {
 	private Boolean enVie;
         private Collection<Tresor> tresor = new ArrayList<>();
          private String role;
+         private String Capacité;
+
+    public String getCapacité() {
+        return Capacité;
+    }
+
+    public void setCapacité(String Capacité) {
+        this.Capacité = Capacité;
+    }
         
         Aventurier(String nom){
             setNom(nom);
@@ -111,8 +120,10 @@ public abstract class Aventurier {
 
 }
      public void afficherCarte(){
+         int a = 1;
      for(CarteTresor c : this.cartes){
-         c.afficher();
+          System.out.println(a + "-");c.afficher();
+          a =a+1;
      }   
     }
      

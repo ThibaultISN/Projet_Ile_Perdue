@@ -90,18 +90,7 @@ La Porte de
        
         
 
-        /*int paramX = tuile.getPosition().getX();
-        int paramY = tuile.getPosition().getY();
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
-
-        listconti.add(new Position(paramX + 1, paramY));
-        listconti.add(new Position(paramX, paramY + 1));
-        listconti.add(new Position(paramX - 1, paramY));
-        listconti.add(new Position(paramX, paramY - 1));
-
-
-        return (listconti.contains(this.getPosition()));*/
+        
 
         return (((av.getEmplacement().getPosition().getX() == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() + 1))) ||
                 ((av.getEmplacement().getPosition().getX() == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() - 1))) ||
@@ -117,86 +106,18 @@ La Porte de
        
         
 
-        /*int paramX = tuile.getPosition().getX();
-        int paramY = tuile.getPosition().getY();
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
-
-        listconti.add(new Position(paramX + 1, paramY));
-        listconti.add(new Position(paramX, paramY + 1));
-        listconti.add(new Position(paramX - 1, paramY));
-        listconti.add(new Position(paramX, paramY - 1));
-
-
-        return (listconti.contains(this.getPosition()));*/
 
         return (((av.getEmplacement().getPosition().getX()+1 == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() + 1))) ||
                 ((av.getEmplacement().getPosition().getX()-1 == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == (this.getPosition().getY() - 1))) ||
-                (((av.getEmplacement().getPosition().getX() + 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()+1)) ||
-                (((av.getEmplacement().getPosition().getX() - 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()-1))
+                (((av.getEmplacement().getPosition().getX() - 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()+1)) ||
+                (((av.getEmplacement().getPosition().getX() - 1) == this.getPosition().getX()) && (av.getEmplacement().getPosition().getY() == this.getPosition().getY()+1))
                 );
 
         }
-    // Surcharge de méthode pour une position donné en parametre 
-    public boolean estcontigue(Position pos) {
-        
-
-        
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
-
-        int parametreX = pos.getX();
-        int parametreY = pos.getY();
-        
-        listconti.add(new Position(parametreX + 1, parametreY));
-        listconti.add(new Position(parametreX, parametreY + 1));
-        listconti.add(new Position(parametreX - 1, parametreY));
-        listconti.add(new Position(parametreX, parametreY - 1));
-
-
-        return (listconti.contains(this.position));
-
-
-
-    }
-    
-    public boolean estdiagonal(Tuile tuile){
-       
-        int paramX = tuile.position.getX();
-        int paramY = tuile.position.getY();
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position contigue de la tuile en parametre
-        
-        listconti.add(new Position(paramX + 1, paramY + 1));
-        listconti.add(new Position(paramX -1 , paramY + 1));
-        listconti.add(new Position(paramX - 1, paramY +1));
-        listconti.add(new Position(paramX +1, paramY - 1));
-
-
-        return (listconti.contains(this.position));
-        
-    }
-        // Surcharge de méthode pour une position donné en parametre 
-    public boolean estdiagonal(Position pos){
-       
-
-        int paramX = pos.getX();
-        int paramY = pos.getY();
-
-        ArrayList<Position> listconti = new ArrayList<>(); // liste des position diagonal de la tuile en parametre
-
-        listconti.add(new Position(paramX + 1, paramY + 1));
-        listconti.add(new Position(paramX -1 , paramY + 1));
-        listconti.add(new Position(paramX - 1, paramY +1));
-        listconti.add(new Position(paramX +1, paramY - 1));
-
-
-        return (listconti.contains(this.position));
-        
-    }
+   
 
     public void affiche(){
-        System.out.println( this.getNom()+ "|| position : (" + this.position.getX() +","+ this.position.getY()+")" );
+        System.out.println( this.getNom()+ "|| position : (" + this.position.getX() +","+ this.position.getY()+") " +" " + this.etatTuile );
 
 
     }

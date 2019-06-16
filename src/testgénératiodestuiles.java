@@ -21,11 +21,16 @@ public class testgénératiodestuiles {
         Grille g = new Grille();
         g.générationgrille();
         ArrayList<Tuile> l = g.getTuiles();
-        
+        Plongeur av = new Plongeur("thib");
         
         for(Tuile t : l ){
-            t.affiche();
+            if(t.estdiagonal(av)){
+                t.affiche();
+            }
         }
+        
+       
+        
         
         
         

@@ -10,8 +10,8 @@ public class Ingenieur extends Aventurier {
 	private Boolean enVie;
         
         Ingenieur(String nom){
-            super(nom);
-            
+            super.setNom(nom);
+             super.setRole("Ingenieur");
         }
         
          Ingenieur(){

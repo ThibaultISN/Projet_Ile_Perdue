@@ -9,8 +9,9 @@ public class Explorateur extends Aventurier {
 	private Boolean enVie;
        
         
-        Explorateur(){
+        Explorateur(String Nom){
             super.setRole("Explorateur");
+            super.setNom(Nom);
         }
         
        
