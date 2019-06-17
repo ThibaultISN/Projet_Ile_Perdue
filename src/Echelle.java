@@ -23,9 +23,14 @@ public class Echelle {
             setNiveau(4);
 
         }
-
+    
 
     }
+    
+    Echelle(int i){
+        setNiveau(i);
+             
+    }   
 
     public int getNiveau() {
         return niveau;
@@ -63,13 +68,11 @@ public class Echelle {
     }
 
 
-    public Echelle(int niveau) {
-        this.niveau = niveau;
-
-    }
+    
 
     public void Monter(){
         setNiveau(this.getNiveau()+1);
+        System.out.println("Niveau de l'eau :=" + this.getNiveau());
     }
 
 

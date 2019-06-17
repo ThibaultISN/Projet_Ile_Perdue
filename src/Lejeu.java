@@ -24,6 +24,8 @@ public class Lejeu {
         g.générationgrille();
         controleur.setGrille(g);
         controleur.initterrain();
+        controleur.defosse= new ArrayList<>();
+        controleur.defossecartinond = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le nombre de joeur ( entre 2 et 4 )");
@@ -164,6 +166,9 @@ public class Lejeu {
             difficulte = Integer.parseInt(dif);
 
         }
+        controleur.setEchelle(new Echelle(difficulte));
+        
+        
 
         /*switch (difficulte) {
             case 1:
@@ -192,25 +197,27 @@ public class Lejeu {
         while (true) {
 
             for (Aventurier av : controleur.getJoueurs()) {
-                
-              
+
                 int nbaction = 0;
                 System.out.println("==================================================");
                 System.out.println("C'est au tour de " + av.getNom() + " role : " + av.getRole());
                 while (nbaction < 3) {
-                    int actionrestante= 3-nbaction;
-                    System.out.println("il vous reste " + actionrestante + " action(s)"  );
+                    int actionrestante = 3 - nbaction;
+                    System.out.println("il vous reste " + actionrestante + " action(s)");
                     sc = new Scanner(System.in);
                     System.out.println("\n Veuillez saisir votre action \n "
                             + "1- Voir mes cartes \n"
                             + "2-Me déplacer\n"
                             + "3-Donner une carte\n"
                             + "4-Assecher une tuile\n"
-                            + "5-Utiliser carte helicoptere \n"
-                            + "6- Utiliser une carte sac de sable \n");
+                            + "5-Utiliser carte helicoptere (executable par n'importe quel joueur) \n"
+                            + "6- Utiliser une carte sac de sable (executable par n'importe quel joueur) \n"
+                            + "7- Prendre trésor  \n"
+                            + "8- Passer son tour"
+                    );
                     String act = sc.nextLine();
                     int numact = Integer.parseInt(act);
-                    while (numact < 1 || numact > 6) {
+                    while (numact < 1 || numact > 9) {
                         System.out.println("Valeur saisit incorrect \n");
                         System.out.println("Veuillez saisir votre action \n "
                                 + "1- Voir mes cartes \n"
@@ -219,15 +226,19 @@ public class Lejeu {
                                 + "4-Assecher une tuile\n"
                                 + "5-Utiliser carte helicoptere\n"
                                 + "6- Utiliser une carte sac de sable\n"
-                                + "7- Connaitr ma position \n");
+                                + "7- Prendre trésor  \n"
+                                + "8- Passer son tour"
+                        );
                         act = sc.nextLine();
                         numact = Integer.parseInt(act);
 
                     }
 
                     switch (numact) {
+
                         case 1:
                             av.afficherCarte();
+                            
                             break;
                         case 2:
 
@@ -244,9 +255,7 @@ public class Lejeu {
                             System.out.println("\n Saisir le numéro de la case");
                             String bbb = sc.nextLine();
                             int tui = Integer.parseInt(bbb);
-                            av.setEmplacement(controleur.tuilepossibledep(av).get(tui-1));
-                            
-                            
+                            av.setEmplacement(controleur.tuilepossibledep(av).get(tui - 1));
 
                             System.out.println("Vous etes positionné en ");
                             av.getEmplacement().affiche();
@@ -314,7 +323,8 @@ public class Lejeu {
                             if (zoizo.isEmpty()) {
                                 System.out.println("Aucune case à secher a proximité");
                             } else {
-                                System.out.println("Vous etes positionné en ");av.getEmplacement().affiche();
+                                System.out.println("Vous etes positionné en ");
+                                av.getEmplacement().affiche();
                                 System.out.println("Vous pouvez assechez ces case");
 
                                 controleur.affichetuileassechable(av);
@@ -404,47 +414,126 @@ public class Lejeu {
                                         }
                                     }
                                     nbaction = nbaction + 1;
-                                }
-                                else {
+                                } else {
                                     int numtuile = controleur.grille.numTuile(controleur.tuileassechable(av).get(indext).getNom());
 
                                     controleur.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
                                     System.out.println("Update :");
                                     controleur.grille.tuiles.get(numtuile).affiche();
-                                    
+
                                     nbaction = nbaction + 1;
                                 }
                             }
 
                             break;
 
-                        case 5 : break;
-                        case 6 : if(av.cartes.contains(new CarteTresor("Sac de Sable"))){
-                                 controleur.affichecaseinonde();
-                                  sc = new Scanner(System.in);
-                                        System.out.println("Saisir le numero de la tuile a secher ");
+                        case 5:
+                            break;
 
-                                        bbb = sc.nextLine();
-                                        tui = Integer.parseInt(bbb);
-                                        int indext = tui-1;
-                                        int numtuile = controleur.grille.numTuile(controleur.tuileassechable(av).get(indext).getNom());
+                        case 6:
+                            if (controleur.posssedeSdS().isEmpty()) {
+                                System.out.println("Aucun joueur ne possede de carte sac de sable");
+                            } else {
+                                System.out.println("Ce(s) joueur possede une carte sac de sable");
+                                sc = new Scanner(System.in);
+                                controleur.afficheposssedeSdS();
+                                System.out.println("saisir numero du joueur qui utilise la carte");
+                                bbb = sc.nextLine();
+                                int numjsds = Integer.parseInt(bbb);
+                                int indexsds = numjsds - 1;
 
-                                    controleur.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
-                                    System.out.println("Update :");
-                                    controleur.grille.tuiles.get(numtuile).affiche();
-                                 
-                        }else{
-                           System.out.println("Vous n'avez pas de carte sac de Sable ");
-                        }
+                                controleur.affichecaseinonde();
+                                sc = new Scanner(System.in);
+                                System.out.println("Saisir le numero de la tuile a secher ");
+
+                                bbb = sc.nextLine();
+                                tui = Integer.parseInt(bbb);
+                                int indext = tui - 1;
+                                int numtuile = controleur.grille.numTuile(controleur.caseinonde().get(indext).getNom());
+
+                                controleur.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
+                                System.out.println("Update :");
+                                controleur.grille.tuiles.get(numtuile).affiche();
+
+                                int numjoueur = controleur.numAventurier(controleur.posssedeSdS().get(indexsds).getNom());
+
+                                controleur.getJoueurs().get(numjoueur).cartes.remove(controleur.getJoueurs().get(numjoueur).numcarte("Sac de Sable"));
+                                controleur.defosse.add(new CarteTresor("Sac de Sable"));
+
+                            }
+
+                            break;
+                        case 7:
+                            if (av.getEmplacement().getTrésor() != null) {
+                                if (controleur.Possibleprisetrésor(av, av.getEmplacement().getTrésor())) {
+                                    controleur.prendretresor(av, av.getEmplacement().getTrésor());
+                                    System.out.println("Felicitation vous avez le pris le tresor"
+                                            + " " + av.getEmplacement().getTrésor().getNom());
+                                    nbaction = nbaction + 1;
+                                }
+                            } else {
+                                System.out.println("Vous n'etes pas sur une tuile avec un trésor");
+                            }
+
+                        case 8:
+                            System.out.println("Vous avez passé votre tour");
+                            nbaction = 3;
+
+                    }
+                }
+
+                int repet = 0;
+                while (repet < 2) {
+                    int num = 0;
+                    if(controleur.getCartes().get(0).getType()=="Montée des eaux"){
+                        System.out.println("Vous avez pioché une carte monté des eaux");
+                        repet=repet+1;
+                        controleur.echelle.Monter();
+                    }
+                    else{
+                        
+                    av.cartes.add(controleur.getCartes().get(0));
+                    controleur.cartes.remove(0);
+                    repet = repet + 1;
+                    if (av.getCartes().size() > 6) {
+                       System.out.println("Vous avez trop de carte veuillez défosser");
+                        av.afficherCarte();
+                        String  bbb = sc.nextLine();
+                                int numc = Integer.parseInt(bbb);
+                                int indexc = numc-1;
                                 
-                                
-                                break;
+                        controleur.defosse.add(av.cartes.get(indexc));
+                        av.cartes.remove(indexc);
+                         
+                        
                     }
 
                 }
+                }
+                
+                int nivo = controleur.getEchelle().getGraduation();
+                int indcourant =1;
+                while(indcourant< nivo){
+                  Tuile tempo = controleur.getCartesinnond().get(0).getTuile();
+                  int tempot = controleur.grille.numTuile(tempo.getNom());
+                  if( controleur.grille.tuiles.get(tempot).getEtatTuile()==EtatTuile.seche){
+                  controleur.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.inondé);
+                  controleur.defossecartinond.add(controleur.getCartesinnond().get(0));
+                  controleur.cartesinnond.remove(0);
+                  } else if( controleur.grille.tuiles.get(tempot).getEtatTuile()==EtatTuile.inondé) {
+                     controleur.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.disparue);
+                     controleur.cartesinnond.remove(0);
+                  }
+                  
+                  System.out.println("Update :");
+                                    controleur.grille.tuiles.get(tempot).affiche();
+                                    indcourant=indcourant +1;
+                }
+                
+
             }
+
         }
 
     }
-
 }

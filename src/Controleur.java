@@ -6,6 +6,7 @@ public class Controleur {
     Grille grille;
     ArrayList<Aventurier> joueurs = new ArrayList<>();
     ArrayList<CarteTresor> cartes = new ArrayList<>();
+    ArrayList<CarteTresor> defosse = new ArrayList<>();
     ArrayList<CarteInondation> cartesinnond = new ArrayList<>();
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
@@ -25,7 +26,9 @@ public class Controleur {
         getTresores().add(new Tresor("lion"));
         getTresores().add(new Tresor("coupe"));
         initcart();
-
+         defosse = new ArrayList<>();
+         defossecartinond = new ArrayList<>();
+        
     }
 
     public boolean PossibleDon(Aventurier joueurRec, Aventurier joueurEnv, CarteTresor cartetrésor) {
@@ -83,11 +86,18 @@ public class Controleur {
 
     }
 
-    public void prendretrésor(Aventurier joueur, Tresor trésor) {
+    public void prendretresor(Aventurier joueur, Tresor tresor) {
 
         //V2
-        if (Possibleprisetrésor(joueur, trésor)) {
-            joueur.addTresor(trésor);
+        if (Possibleprisetrésor(joueur, tresor)) {
+            joueur.addTresor(tresor);
+            this.tresores.remove(tresor);
+            for(CarteTresor a : joueur.cartes){
+                if(a.getT()==tresor){
+                    this.defosse.add(a);
+                    joueur.cartes.remove(a);
+                }
+            }
         }
 
     }
@@ -295,13 +305,13 @@ public class Controleur {
                 if ((t.estcontigue(av) || t.estdiagonal(av)) && t.getNom() != "Null" && t.getEtatTuile() != EtatTuile.disparue) {
                     l.add(t);
 
-                } 
-            }else if (av.getRole() == "Pilote") {
-                 if ( t.getEtatTuile() != EtatTuile.disparue) {
+                }
+            } else if (av.getRole() == "Pilote") {
+                if (t.getEtatTuile() != EtatTuile.disparue) {
                     l.add(t);
 
                 }
-                }
+            }
         }
         return l;
     }
@@ -382,8 +392,10 @@ public class Controleur {
     }
 
     public void affichecaseinonde() {
+        int a=1;
         for (Tuile t : this.caseinonde()) {
-            t.affiche();
+            System.out.println(a);t.affiche();
+            a=a+1;
         }
     }
 
@@ -405,4 +417,37 @@ public class Controleur {
         }
     }
 
+    public ArrayList<Aventurier> posssedeSdS() {
+        ArrayList<Aventurier> l = new ArrayList<>();
+       
+        for (Aventurier o : this.getJoueurs()) {
+            int a = 0;
+            for( CarteTresor p : o.getCartes()){
+                if (p.getType()=="Sac de Sable" && a==0){
+                    l.add(o);
+                    a=1;
+                }
+            }
+        }
+        return l;
+    }
+
+    
+    
+     public void afficheposssedeSdS() {
+         int a = 1;
+        for (Aventurier t : this.posssedeSdS()) {
+            System.out.println(a + "-" + t.getNom());
+            a=a+1;
+        }
+    }
+     
+     public void supprimecarte(Aventurier av , CarteTresor t){
+         av.getCartes().remove(t);
+         this.defosse.add(t);
+     }
+     
+     
+     
+     
 }

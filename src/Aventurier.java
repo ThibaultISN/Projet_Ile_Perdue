@@ -163,5 +163,6 @@ public abstract class Aventurier {
         return (listconti.contains(this.getEmplacement()));
         
     }
-     
+      
+      
 }
