@@ -26,6 +26,9 @@ public class Lejeu {
         controleur.initterrain();
         controleur.defosse= new ArrayList<>();
         controleur.defossecartinond = new ArrayList<>();
+        
+        
+        
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le nombre de joeur ( entre 2 et 4 )");
@@ -146,7 +149,7 @@ public class Lejeu {
 
         controleur.setCartesinnond(controleur.Carteterraingen());
         controleur.initterrain();
-
+        
         /* verif  System.out.println("===================================");
         controleur.affichegrille();
          System.out.println("===================================");
@@ -190,7 +193,8 @@ public class Lejeu {
 
         }*/
         controleur.affichegrille();
-
+        VueGrille vg = new VueGrille(g);
+        vg.setG(controleur.grille); vg.getWindow().setVisible(true);
         System.out.println("LA PARTIE VA DEBUTE");
         System.out.println(controleur.getJoueurs().size());
 

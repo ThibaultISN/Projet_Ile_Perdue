@@ -11,6 +11,7 @@ public class Controleur {
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
     ArrayList<Tresor> tresores = new ArrayList<>();
+    VueGrille vuegrille;
 
     ;
 

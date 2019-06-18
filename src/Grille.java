@@ -59,27 +59,38 @@ public class Grille {
     public void générationgrille() {
 
         ArrayList<Tuile> nomtuiles = new ArrayList<Tuile>();
+        
+      
+        
         tuiles.add(new Tuile("Le Pont des Abimes", new Position(3, 1)));
         tuiles.add(new Tuile("La Porte de Bronze", new Position(4, 1)));
+       
+        
+        
+        
         tuiles.add(new Tuile("La Caverne des Ombres", new Tresor("Flamme"), new Position(2, 2)));
         tuiles.add(new Tuile("La Porte de Fer", new Position(3, 2)));
         tuiles.add(new Tuile("La Porte d’Or", new Position(4, 2)));
         tuiles.add(new Tuile("Les Falaises de l’Oubli", new Position(5, 2)));
+        
         tuiles.add(new Tuile("Le Palais de Corail", new Tresor("Coupe"), new Position(1, 3)));
         tuiles.add(new Tuile("La Porte d’Argent", new Position(2, 3)));
         tuiles.add(new Tuile("Les Dunes de l’Illusion", new Position(3, 3)));
         tuiles.add(new Tuile("Heliport", new Position(4, 3)));
         tuiles.add(new Tuile("La Porte de Cuivre", new Position(5, 3)));
         tuiles.add(new Tuile("Le Jardin des Hurlements", new Tresor("Lion"), new Position(6, 3)));
+        
         tuiles.add(new Tuile("La Foret Pourpre", new Position(1, 4)));
         tuiles.add(new Tuile("Le Lagon Perdu", new Position(2, 4)));
         tuiles.add(new Tuile("Le Marais Brumeux", new Position(3, 4)));
         tuiles.add(new Tuile("Observatoire", new Position(4, 4)));
         tuiles.add(new Tuile("Le Rocher Fantome", new Position(5, 4)));
         tuiles.add(new Tuile("La Caverne du Brasier", new Tresor("Flamme"), new Position(6, 4)));
+        
         tuiles.add(new Tuile("Le Temple du Soleil", new Tresor("Lune"), new Position(2, 5)));
         tuiles.add(new Tuile("Le Temple de La Lune", new Tresor("Lune"), new Position(3, 5)));
         tuiles.add(new Tuile("Le Palais des Marees", new Tresor("Coupe"), new Position(4, 5)));
+        
         tuiles.add(new Tuile("Le Val du Crepuscule", new Position(5, 5)));
         tuiles.add(new Tuile("La Tour du Guet", new Position(3, 6)));
         tuiles.add(new Tuile("Le Jardin des Murmures", new Tresor("Lion"), new Position(4, 6)));
