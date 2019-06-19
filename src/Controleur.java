@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-public class Controleur {
+public class Controleur implements Observateur {
 
     Grille grille;
     ArrayList<Aventurier> joueurs = new ArrayList<>();
@@ -11,26 +11,56 @@ public class Controleur {
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
     ArrayList<Tresor> tresores = new ArrayList<>();
-
+    
     ;
+    
+    private VueDemarrer ihmDem;
+    private VueAventurier ihmAv;
 
     /**
      *
      * @param nomjoueur
      * @param cartetrésor
      */
-    
     public Controleur() {
         getTresores().add(new Tresor("flamme"));
         getTresores().add(new Tresor("lune"));
         getTresores().add(new Tresor("lion"));
         getTresores().add(new Tresor("coupe"));
         initcart();
-         defosse = new ArrayList<>();
-         defossecartinond = new ArrayList<>();
+        defosse = new ArrayList<>();
+        defossecartinond = new ArrayList<>();
+        Grille g = new Grille();
+        g.générationgrille();
+        this.setGrille(g);
+        this.initterrain();
+        this.defosse= new ArrayList<>();
+        this.defossecartinond = new ArrayList<>();
+       
+        
+        
+        this.attributioncart();
+        this.setCartesinnond(this.Carteterraingen());
+        this.initterrain();
+        VueDemarrer ihmDem = new VueDemarrer();
+       // ihmAv = new VueAventurier();
+        
+        this.setIhmDem(ihmDem);
+        ihmDem.afficher();
+        ihmDem.addObservateur(this);
+        
+       
         
     }
 
+    public VueDemarrer getIhmDem() {
+        return ihmDem;
+    }
+
+    public void setIhmDem(VueDemarrer ihmDem) {
+        this.ihmDem = ihmDem;
+    }
+    
     public boolean PossibleDon(Aventurier joueurRec, Aventurier joueurEnv, CarteTresor cartetrésor) {
         // TODO - implement Controleur.PossibleDon
         if (joueurEnv.getRole() == "Messager") {
@@ -92,8 +122,8 @@ public class Controleur {
         if (Possibleprisetrésor(joueur, tresor)) {
             joueur.addTresor(tresor);
             this.tresores.remove(tresor);
-            for(CarteTresor a : joueur.cartes){
-                if(a.getT()==tresor){
+            for (CarteTresor a : joueur.cartes) {
+                if (a.getT() == tresor) {
                     this.defosse.add(a);
                     joueur.cartes.remove(a);
                 }
@@ -392,10 +422,11 @@ public class Controleur {
     }
 
     public void affichecaseinonde() {
-        int a=1;
+        int a = 1;
         for (Tuile t : this.caseinonde()) {
-            System.out.println(a);t.affiche();
-            a=a+1;
+            System.out.println(a);
+            t.affiche();
+            a = a + 1;
         }
     }
 
@@ -419,35 +450,184 @@ public class Controleur {
 
     public ArrayList<Aventurier> posssedeSdS() {
         ArrayList<Aventurier> l = new ArrayList<>();
-       
+
         for (Aventurier o : this.getJoueurs()) {
             int a = 0;
-            for( CarteTresor p : o.getCartes()){
-                if (p.getType()=="Sac de Sable" && a==0){
+            for (CarteTresor p : o.getCartes()) {
+                if (p.getType() == "Sac de Sable" && a == 0) {
                     l.add(o);
-                    a=1;
+                    a = 1;
                 }
             }
         }
         return l;
     }
 
-    
-    
-     public void afficheposssedeSdS() {
-         int a = 1;
+    public void afficheposssedeSdS() {
+        int a = 1;
         for (Aventurier t : this.posssedeSdS()) {
             System.out.println(a + "-" + t.getNom());
-            a=a+1;
+            a = a + 1;
         }
     }
-     
-     public void supprimecarte(Aventurier av , CarteTresor t){
-         av.getCartes().remove(t);
-         this.defosse.add(t);
-     }
-     
-     
-     
-     
+
+    public void supprimecarte(Aventurier av, CarteTresor t) {
+        av.getCartes().remove(t);
+        this.defosse.add(t);
+    }
+
+    public void traiterMessage(Message m) {
+        String difficulte,joueur1,joueur2,joueur3,joueur4,action;
+        
+        switch (m.type) {
+            case DEMARRER_PARTIE:
+                difficulte = m.difficulte;
+                if ("Novice".equals(difficulte)) {
+                    setEchelle(new Echelle(1));
+                }
+                if ("Normal".equals(difficulte)) {
+                    setEchelle(new Echelle(2));
+                }
+                if ("Elite".equals(difficulte)) {
+                    setEchelle(new Echelle(3));
+                }
+                if ("Légendaire".equals(difficulte)) {
+                    setEchelle(new Echelle(4));
+                }
+                
+                
+                
+                
+                int h=0;
+                
+                
+                
+                ArrayList<String> randomrole = new ArrayList<>();
+                randomrole = this.randomrole();
+                
+                for(String str : m.joueur){
+                    
+                switch (randomrole.get(h)) {
+                case "Plongeur":
+                    
+
+                    Plongeur plongeur = new Plongeur(str);
+                   
+
+                    ArrayList<Tuile> l = this.grille.getTuiles();
+                    Tuile a = l.get(this.grille.numTuile("La Porte de Fer"));
+                    plongeur.setEmplacement(a);
+                    this.joueurs.add(plongeur);
+                    
+
+                    break;
+
+                case "Messager":
+                   
+
+                    Messager messager = new Messager(str);
+                    l = grille.getTuiles();
+                    Tuile b = l.get(grille.numTuile("La Porte d’Argent"));
+                    messager.setEmplacement(b);
+                    
+                    this.joueurs.add(messager);
+
+                    break;
+
+                case "Navigateur":
+                    
+
+                    Navigateur navigateur = new Navigateur(str);
+                    l = grille.getTuiles();
+                    Tuile c = l.get(grille.numTuile("La Porte d’Or"));
+                    navigateur.setEmplacement(c);
+                    
+                    randomrole.remove(1);
+                    this.joueurs.add(navigateur);
+
+                    break;
+
+                case "Ingénieur":
+                    
+
+                    Ingenieur ingenieur = new Ingenieur(str);
+                    l = grille.getTuiles();
+                    Tuile d = l.get(grille.numTuile("La Porte de Bronze"));
+                    ingenieur.setEmplacement(d);
+                    
+                    this.joueurs.add(ingenieur);
+
+                    break;
+
+                case "Explorateur":
+                    
+
+                    Explorateur explorateur = new Explorateur(str);
+                    l = grille.getTuiles();
+                    Tuile e = l.get(grille.numTuile("La Porte de Cuivre"));
+                    explorateur.setEmplacement(e);
+
+                    
+                     this.joueurs.add(explorateur);
+
+                    break;
+
+                case "Pilote":
+                    
+
+                    Pilote pilote = new Pilote(str);
+                    l = grille.getTuiles();
+                    Tuile f = l.get(grille.numTuile("Heliport"));
+                    pilote.setEmplacement(f);
+                    
+                     this.joueurs.add(pilote);
+
+                    break;
+
+            }
+                h=h+1;
+                }
+                
+                
+                
+                
+                ihmDem.demarrerJeu();
+                ihmDem.fermer();
+                ihmAv = new  VueAventurier(joueurs.get(0),this);
+                ihmAv.afficher();
+               
+                break;
+                
+            case JOUER_COUP:
+
+                action = m.action;
+                if ("seDeplacer".equals(action)) {
+                                          
+                                    }
+                if ("voirCartes".equals(action)) {
+                    
+                }
+                if ("prendre".equals(action)) {
+                    
+                }
+                if ("donner".equals(action)) {
+                    
+                }
+                if ("carteHeli".equals(action)) {
+                    
+                }
+                if ("carteSac".equals(action)) {
+                    
+                }
+                if ("assecher".equals(action)) {
+                    
+                }
+                if ("passerTour".equals(action)) {
+                    
+                }
+                
+                break;
+                
+        }
+    }
 }
