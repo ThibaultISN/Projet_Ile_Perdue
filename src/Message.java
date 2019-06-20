@@ -16,7 +16,9 @@ class Message {
     
     String j1, j2, j3, j4;
     String difficulte;
-    String tuile;
+    Tuile tuile;
+    CarteTresor cartetresor;
+    Aventurier av;
     String action;
     String don;
     String assecher;

@@ -19,9 +19,12 @@ public class VueAventurier extends Observe {
     private JPanel panelB;
     public static final int ETAT_ACTION = 1;
     public static final int ETAT_GAGNANT = 2;
+    Aventurier av;
+    Controleur c ;
 
     public VueAventurier(Aventurier av, Controleur c) {
-        
+        this.av=av;
+        this.c=c;
         fenetre = new JFrame("L'île Perdue : jouer coup");
         this.configureWindow(fenetre);
         voirCartes = new JButton("Voir Cartes");
@@ -44,7 +47,7 @@ public class VueAventurier extends Observe {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
                     m.action = "seDeplacer";
-                    m.tuile = (String) seDeplacer.getSelectedItem();                 
+                    m.tuile = (Tuile) seDeplacer.getSelectedItem();                 
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
@@ -203,6 +206,10 @@ public class VueAventurier extends Observe {
         fenetre.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(720, 1080);
         fenetre.setVisible(true);                        
+    }
+    
+    public void actualiser(Controleur c ,Aventurier av){
+       
     }
 
 }

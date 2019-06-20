@@ -15,7 +15,7 @@ public class Controleur implements Observateur {
     ;
     
     private VueDemarrer ihmDem;
-    private VueAventurier ihmAv;
+    private newVueAventurier ihmAv;
 
     /**
      *
@@ -39,7 +39,7 @@ public class Controleur implements Observateur {
        
         
         
-        this.attributioncart();
+        
         this.setCartesinnond(this.Carteterraingen());
         this.initterrain();
         VueDemarrer ihmDem = new VueDemarrer();
@@ -462,6 +462,30 @@ public class Controleur implements Observateur {
         }
         return l;
     }
+    public ArrayList<Aventurier> joueursurtuile(Tuile t){
+         ArrayList<Aventurier> l = new ArrayList<>();
+        for(Aventurier av : this.joueurs){
+            if(av.getEmplacement()==t){
+                l.add(av);
+            }
+        }
+        return l;
+    }
+    
+     public ArrayList<Aventurier> posssedeHelico() {
+        ArrayList<Aventurier> l = new ArrayList<>();
+
+        for (Aventurier o : this.getJoueurs()) {
+            int a = 0;
+            for (CarteTresor p : o.getCartes()) {
+                if (p.getType() == "Helicopter" && a == 0) {
+                    l.add(o);
+                    a = 1;
+                }
+            }
+        }
+        return l;
+    }
 
     public void afficheposssedeSdS() {
         int a = 1;
@@ -590,10 +614,10 @@ public class Controleur implements Observateur {
                 
                 
                 
-                
+                this.attributioncart();
                 ihmDem.demarrerJeu();
                 ihmDem.fermer();
-                ihmAv = new  VueAventurier(joueurs.get(0),this);
+                ihmAv = new  newVueAventurier(joueurs.get(0),this);
                 ihmAv.afficher();
                
                 break;
@@ -602,10 +626,12 @@ public class Controleur implements Observateur {
 
                 action = m.action;
                 if ("seDeplacer".equals(action)) {
-                                          
+                   joueurs.get(numAventurier(m.av.getNom())).setEmplacement(m.tuile);
+                   joueurs.get(numAventurier(m.av.getNom())).setNbAction(joueurs.get(numAventurier(m.av.getNom())).getNbAction() -1 );
+                   
                                     }
                 if ("voirCartes".equals(action)) {
-                    
+                    // Faire une fenetre avec les Cartes
                 }
                 if ("prendre".equals(action)) {
                     
@@ -620,6 +646,7 @@ public class Controleur implements Observateur {
                     
                 }
                 if ("assecher".equals(action)) {
+                    int numtuile = this.grille.numTuile(m.tuile.getNom());
                     
                 }
                 if ("passerTour".equals(action)) {

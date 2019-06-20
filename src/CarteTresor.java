@@ -24,6 +24,11 @@ public class CarteTresor {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return this.getType();
+    }
+
    
     
     
