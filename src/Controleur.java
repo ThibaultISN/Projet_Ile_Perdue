@@ -7,6 +7,7 @@ public class Controleur implements Observateur {
     ArrayList<Aventurier> joueurs = new ArrayList<>();
     ArrayList<CarteTresor> cartes = new ArrayList<>();
     ArrayList<CarteTresor> defosse = new ArrayList<>();
+    
     ArrayList<CarteInondation> cartesinnond = new ArrayList<>();
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
