@@ -495,6 +495,20 @@ public class Controleur implements Observateur {
             a = a + 1;
         }
     }
+    
+    public Aventurier joueursuivant(Aventurier av){
+        Aventurier aven = null;
+        
+        if(this.joueurs.indexOf(av)< joueurs.size()){
+       int numsuivant = this.joueurs.indexOf(av) +1 ;
+        aven = this.joueurs.get(numsuivant);
+    }else if (this.joueurs.indexOf(av)== this.joueurs.size()){
+            int numsuivant = 0;
+           aven =  this.joueurs.get(numsuivant);
+        }
+        return aven;
+        
+    }
 
     public void supprimecarte(Aventurier av, CarteTresor t) {
         av.getCartes().remove(t);
@@ -614,11 +628,12 @@ public class Controleur implements Observateur {
                 }
                 
                 
-                
+                 System.out.println(joueurs);
                 this.attributioncart();
                 ihmDem.demarrerJeu();
                 ihmDem.fermer();
                 ihmAv = new  newVueAventurier(joueurs.get(0),this);
+                ihmAv.addObservateur(this);
                 ihmAv.afficher();
                
                 break;
@@ -627,9 +642,19 @@ public class Controleur implements Observateur {
 
                 action = m.action;
                 if ("seDeplacer".equals(action)) {
+                    m.av.getEmplacement().affiche();
                    joueurs.get(numAventurier(m.av.getNom())).setEmplacement(m.tuile);
-                   joueurs.get(numAventurier(m.av.getNom())).setNbAction(joueurs.get(numAventurier(m.av.getNom())).getNbAction() -1 );
                    
+                   joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
+                   m.av.getEmplacement().affiche();
+                   ihmAv.fermer();
+                   ihmAv.actualiser(this, m.av);
+                   ihmAv.afficher();
+                   if(m.av.getNbAction()==0){
+                       ihmAv.fermer();
+                       this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
+                       ihmAv.afficher();
+                   }
                                     }
                 if ("voirCartes".equals(action)) {
                     // Faire une fenetre avec les Cartes
@@ -652,6 +677,9 @@ public class Controleur implements Observateur {
                 }
                 if ("passerTour".equals(action)) {
                     
+                     ihmAv.fermer();
+                       this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
+                       ihmAv.afficher();
                 }
                 
                 break;

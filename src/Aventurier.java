@@ -5,12 +5,19 @@ public abstract class Aventurier {
 	ArrayList<CarteTresor> cartes = new ArrayList<>();
 	private Tuile emplacement;
 	private String Nom;
-	private int nbAction;
+	private int nbAction = 3;
 	private Boolean enVie;
         private Collection<Tresor> tresor = new ArrayList<>();
          private String role;
          private String Capacité;
+         private Boolean competenceutilise= false;
 
+    public Boolean getCompetenceutilise() {
+        return competenceutilise;
+    }
+
+         
+         
     public String getCapacité() {
         return Capacité;
     }
@@ -18,6 +25,13 @@ public abstract class Aventurier {
     public void setCapacité(String Capacité) {
         this.Capacité = Capacité;
     }
+
+    @Override
+    public String toString() {
+        return Nom;
+    }
+    
+    
         
         Aventurier(String nom){
             setNom(nom);
@@ -86,11 +100,15 @@ public abstract class Aventurier {
         return nbAction;
     }
 
+    public void setNbAction(int nbAction) {
+        this.nbAction = nbAction;
+    }
+
     /**
      * @param nbAction the nbAction to set
      */
-    public void setNbAction(int nbAction) {
-        this.nbAction = nbAction;
+    public void reduireNbAction() {
+        this.nbAction = nbAction -1;
     }
 
     /**

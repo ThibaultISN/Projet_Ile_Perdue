@@ -26,14 +26,16 @@ public class newVueAventurier extends Observe {
    private JFrame fenetre;
    private JPanel info;
    private JPanel action;
-   private JPanel panel1,panel2,panel3,panel4,panel5,panel6;
+   private JPanel Sedeplacer,Secher,Donner,Autrechoix,Helicopter,SacdeSable;
    private JPanel special;
    private JPanel bot;
    private JLabel joueur,role,nbaction,tresorp,capacite,seDeplacer3,assecher3,donnercarte3, carteHeli3, carteSac3;
    private JComboBox JCTuiledep,JCaventurierREC,JCCartedon,JCTuileass,carteHeli2,JCTuileassSAC,jMessager,cMessager,tuile1,tuile2,tPilote;
-   private JButton voirCartes, seDeplacer, donner, assecher, BoutonHelico, carteSac, prendre, passerTour, valider;
-   Aventurier av;
-   Controleur c;
+   private JButton voirCartes, seDeplacer, donner, assecher, BoutonHelico, carteSac, prendre, passerTour, valider,boutonpilote;
+   private Aventurier av;
+   private Controleur c;
+   
+   
    public newVueAventurier(Aventurier av, Controleur c) {
         this.av=av;
         this.c=c;
@@ -47,6 +49,7 @@ public class newVueAventurier extends Observe {
         carteSac = new JButton("Secher");
         prendre = new JButton("Prendre Trésor");
         passerTour = new JButton("Passer Son Tour");
+        
         
         
         
@@ -65,16 +68,18 @@ public class newVueAventurier extends Observe {
         };
         
         Border blackline = BorderFactory.createLineBorder(Color.black);
-          /*      seDeplacer.addActionListener(new ActionListener() {
+               seDeplacer.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    Message m = new Message();       
+                    System.out.println("test");
+                    Message m = new Message();    
+                    m.av= getAv();
                     m.action = "seDeplacer";
-                    m.tuile = (Tuile) seDeplacer2.getSelectedItem();                 
+                    m.tuile = (Tuile) JCTuiledep.getSelectedItem();                 
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
-        });
-        
+        }); 
+         /* 
         voirCartes.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -83,7 +88,7 @@ public class newVueAventurier extends Observe {
                     notifierObservateur(m);
                 }
         });
-        
+       */
         passerTour.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -91,8 +96,10 @@ public class newVueAventurier extends Observe {
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
+                
+                
         });
-        
+         /* 
         donner.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -173,32 +180,33 @@ public class newVueAventurier extends Observe {
         
         
         action = new JPanel();
-        action.setLayout(new GridLayout(5,1));
-        panel1 = new JPanel();
+        action.setLayout(new GridLayout(6,1));
+        
+        Sedeplacer = new JPanel();
         seDeplacer3 = new JLabel("Se déplacer : ");
         JCTuiledep = new JComboBox();
         for(Tuile t : c.tuilepossibledep(av)){
             JCTuiledep.addItem(t);
         }
-        panel1.add(seDeplacer3);
-        panel1.add(JCTuiledep);
-        panel1.add(seDeplacer);
+        Sedeplacer.add(seDeplacer3);
+        Sedeplacer.add(JCTuiledep);
+        Sedeplacer.add(seDeplacer);
         
         
-        action.add(panel1);
         
-        panel2 = new JPanel();
+        
+        Secher = new JPanel();
         assecher3 = new JLabel("Assècher : ");
         JCTuileass = new JComboBox();
         for(Tuile t : c.tuileassechable(av)){
             JCTuileass.addItem(t);
         }
-        panel2.add(assecher3);
-        panel2.add(JCTuileass);
-        panel2.add(assecher);
-        action.add(panel2);
+        Secher.add(assecher3);
+        Secher.add(JCTuileass);
+        Secher.add(assecher);
         
-        panel3 = new JPanel();
+        
+        Donner = new JPanel();
         donnercarte3 = new JLabel("Donner carte : ");
         JCaventurierREC = new JComboBox();
        for(Aventurier t : c.joueursurtuile(av.getEmplacement())){
@@ -209,102 +217,64 @@ public class newVueAventurier extends Observe {
             JCCartedon.addItem(l);
         }
         
-        panel3.add(donnercarte3);
-        panel3.add(JCaventurierREC);
-        panel3.add(JCCartedon);
-        panel3.add(donner);
-        action.add(panel3);
         
-        panel4 = new JPanel();
-        panel4.add(voirCartes);
-        panel4.add(prendre);
         
-        panel5 = new JPanel();
+        Donner.add(donnercarte3);
+        Donner.add(JCaventurierREC);
+        Donner.add(JCCartedon);
+        Donner.add(donner);
+        
+        
+        
+        
+        Helicopter = new JPanel();
         carteHeli3 = new JLabel("Helicoptère : ");
         carteHeli2 = new JComboBox();
          for(Tuile t : c.caseinonde()){
             carteHeli2.addItem(t);
         }
-        panel6 = new JPanel();
+        SacdeSable = new JPanel();
         carteSac3 = new JLabel("Sac de sable : ");
         JCTuileassSAC = new JComboBox();
         for(Tuile t : c.caseinonde()){
             JCTuileassSAC.addItem(t);
         }
-        panel5.add(carteHeli3);
-        panel5.add(carteHeli2);
-        panel5.add(BoutonHelico);
+        Helicopter.add(carteHeli3);
+        Helicopter.add(carteHeli2);
+        Helicopter.add(BoutonHelico);
         
         
-        panel6.add(carteSac3);
-        panel6.add(JCTuileassSAC);
-        panel6.add(carteSac);
-        action.add(panel5);
-        action.add(panel6);
+        SacdeSable.add(carteSac3);
+        SacdeSable.add(JCTuileassSAC);
+        SacdeSable.add(carteSac);
+        
+        Autrechoix = new JPanel();
+        Autrechoix.add(voirCartes);
+        Autrechoix.add(prendre);
+        
+        action.add(Sedeplacer);
+        action.add(Secher);
+        action.add(Donner);
+        
+        action.add(Helicopter);
+        action.add(SacdeSable);
+        action.add(Autrechoix);
         action.setBorder(blackline);
         
-        special = new JPanel();
-        special.setLayout(new GridLayout(3, 1));
-        special.add(new JLabel("Capacité Spécial"));
-        switch(av.getRole()){
-            
-            case "Plongeur" : 
-                special.add(new JLabel("Peut se déplacer dans les cases inondées"));
-                
-            break;
-            
-            case "Messager" :
-                jMessager = new JComboBox();
-                cMessager = new JComboBox();
-                for(Aventurier d : c.joueurs){
-                    jMessager.addItem(d);
-                }
-                for(CarteTresor g : av.getCartes()){
-                    cMessager.addItem(g);
-                }
-                special.add(jMessager);
-                special.add(cMessager);
-            break;
-            
-            case "Ingenieur" :
-                tuile1 = new JComboBox();
-                tuile2 = new JComboBox();
-                for(Tuile t : c.tuileassechable(av)){
-                    tuile1.addItem(t);
-                    tuile2.addItem(t);
-                }
-                special.add(tuile1);
-                special.add(tuile2);
-            break;
-            
-            case "Navigateur" :
-                special.add(new JLabel("Possède 4 actions au lieu de 3"));
-            break;
-            
-            case "Explorateur" :
-                special.add(new JLabel("Peut se déplacer diagonalement"));
-            break;
-            
-            case "Pilote" :
-                tPilote = new JComboBox();
-                for(Tuile t : c.tuilepossibledep(av)){
-                    tPilote.addItem(t);
-                }
-                special.add(tPilote);
-        }
         
-        valider = new JButton("Valider");
-        special.setBorder(blackline);
-        special.add(valider);
+       
+        
+        
+        
         
         bot = new JPanel();
         bot.setBorder(blackline);
         bot.add(passerTour);
         
-        fenetre.setLayout(new GridLayout(4,1));
+        fenetre.setLayout(new GridLayout(3,1));
         fenetre.add(info);
         fenetre.add(action);
-        fenetre.add(capacite);
+        
         fenetre.add(bot);
         
         
@@ -358,11 +328,21 @@ public class newVueAventurier extends Observe {
     public void setC(Controleur c) {
         this.c = c;
     }
+
+    public Aventurier getAv() {
+        return av;
+    }
+    
+    
     
     public void actualiser(Controleur c ,Aventurier av){
        this.setAv(av);
        this.setC(c);
+       JCTuiledep.removeAllItems();
        
+        for(Tuile t : c.tuilepossibledep(av)){
+            JCTuiledep.addItem(t);
+        }
        
        
        
@@ -370,4 +350,12 @@ public class newVueAventurier extends Observe {
        
        
     }
+    
+    public void fermer(){
+        fenetre.setVisible(false);
+    }
+    
+    
+    
+    
 }
