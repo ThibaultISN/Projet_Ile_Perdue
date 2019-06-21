@@ -1,28 +1,21 @@
 import java.util.Collection;
 
-public class CarteTresor {
+public class CarteTresor extends Carte{
 
     private Aventurier joueur;
     private Tresor t;
-    private String type;
+    private EnumTresor nomT;
+    private String type; //pour faire quoi ?
 
     public CarteTresor(Tresor t) {
         this.t = t;
-        this.type=t.getNom();
-        
+        setNomT(nomT);
     }
     
-     public CarteTresor(String type) {
-        this.type = type;
-    }
+//     public CarteTresor(String type) {
+//        this.type = type;
+//    }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 
    
     
@@ -77,6 +70,20 @@ public class CarteTresor {
     
     public void afficher(){
          System.out.println(this.type+" ");
+    }
+
+    /**
+     * @return the nomT
+     */
+    public EnumTresor getNomT() {
+        return nomT;
+    }
+
+    /**
+     * @param nomT the nomT to set
+     */
+    public void setNomT(EnumTresor nomT) {
+        this.nomT = nomT;
     }
     
     

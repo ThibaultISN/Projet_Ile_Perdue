@@ -3,13 +3,13 @@ public class Tresor {
     private Aventurier joueur;
     private boolean estPossede;
     private String nom;
-
-    public String getNom() {
-        return nom;
-    }
     
     Tresor(String nom){
         setNom(nom);
+    }
+
+    public String getNom() {
+        return nom;
     }
 
     /**

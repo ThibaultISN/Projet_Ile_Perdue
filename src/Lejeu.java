@@ -301,9 +301,9 @@ public class Lejeu {
 
                             }
 
-                            if (controleur.PossibleDon(controleur.joueurs.get(indexarec), av, av.cartes.get(indexcarte))) {
-                                controleur.donCarte(controleur.joueurs.get(indexarec), av, av.cartes.get(indexcarte));
-                                System.out.println("Don effectué la carte " + av.cartes.get(indexcarte).getType() + " a étais envoyé à " + controleur.joueurs.get(indexarec).getNom());
+                            if (controleur.PossibleDon(controleur.joueurs.get(indexarec), av, av.getCartes().get(indexcarte))) {
+                                controleur.donCarte(controleur.joueurs.get(indexarec), av, av.getCartes().get(indexcarte));
+                                System.out.println("Don effectué la carte " + av.getCartes().get(indexcarte).getType() + " a étais envoyé à " + controleur.joueurs.get(indexarec).getNom());
                                 nbaction = nbaction + 1;
                             } else {
                                 System.out.println("Impossible de faire le don");
@@ -429,6 +429,67 @@ public class Lejeu {
                                         int indext = tui-1;
                                         int numtuile = controleur.grille.numTuile(controleur.tuileassechable(av).get(indext).getNom());
 
+<<<<<<< OURS
+                                controleur.affichecaseinonde();
+                                sc = new Scanner(System.in);
+                                System.out.println("Saisir le numero de la tuile a secher ");
+
+                                bbb = sc.nextLine();
+                                tui = Integer.parseInt(bbb);
+                                int indext = tui - 1;
+                                int numtuile = controleur.grille.numTuile(controleur.caseinonde().get(indext).getNom());
+
+                                controleur.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
+                                System.out.println("Update :");
+                                controleur.grille.tuiles.get(numtuile).affiche();
+
+                                int numjoueur = controleur.numAventurier(controleur.posssedeSdS().get(indexsds).getNom());
+
+                                controleur.getJoueurs().get(numjoueur).getCartes().remove(controleur.getJoueurs().get(numjoueur).numcarte("Sac de Sable"));
+                                controleur.defosse.add(new CarteTresor("Sac de Sable"));
+
+                            }
+
+                            break;
+                        case 7:
+                            if (av.getEmplacement().getTrésor() != null) {
+                                if (controleur.Possibleprisetrésor(av, av.getEmplacement().getTrésor())) {
+                                    controleur.prendretresor(av, av.getEmplacement().getTrésor());
+                                    System.out.println("Felicitation vous avez le pris le tresor"
+                                            + " " + av.getEmplacement().getTrésor().getNom());
+                                    nbaction = nbaction + 1;
+                                }
+                            } else {
+                                System.out.println("Vous n'etes pas sur une tuile avec un trésor");
+                            }
+
+                        case 8:
+                            System.out.println("Vous avez passé votre tour");
+                            nbaction = 3;
+
+                    }
+                }
+
+                int repet = 0;
+                while (repet < 2) {
+                    int num = 0;
+                    if(controleur.getCartes().get(0).getType()=="Montée des eaux"){
+                        System.out.println("Vous avez pioché une carte monté des eaux");
+                        repet=repet+1;
+                        controleur.echelle.Monter();
+                    }
+                    else{
+                        
+                    av.getCartes().add(controleur.getCartes().get(0));
+                    controleur.cartes.remove(0);
+                    repet = repet + 1;
+                    if (av.getCartes().size() > 6) {
+                       System.out.println("Vous avez trop de carte veuillez défosser");
+                        av.afficherCarte();
+                        String  bbb = sc.nextLine();
+                                int numc = Integer.parseInt(bbb);
+                                int indexc = numc-1;
+=======
                                     controleur.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
                                     System.out.println("Update :");
                                     controleur.grille.tuiles.get(numtuile).affiche();
@@ -436,9 +497,17 @@ public class Lejeu {
                         }else{
                            System.out.println("Vous n'avez pas de carte sac de Sable ");
                         }
+>>>>>>> THEIRS
                                 
+<<<<<<< OURS
+                        controleur.defosse.add(av.getCartes().get(indexc));
+                        av.getCartes().remove(indexc);
+                         
+                        
+=======
                                 
                                 break;
+>>>>>>> THEIRS
                     }
 
                 }
