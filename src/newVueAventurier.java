@@ -8,13 +8,13 @@
  *
  * @author remulef
  */
-
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
+import javax.swing.ComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -23,22 +23,22 @@ import javax.swing.JPanel;
 import javax.swing.border.Border;
 
 public class newVueAventurier extends Observe {
-   private JFrame fenetre;
-   private JPanel info;
-   private JPanel action;
-   private JPanel Sedeplacer,Secher,Donner,Autrechoix,Helicopter,SacdeSable;
-   private JPanel special;
-   private JPanel bot;
-   private JLabel joueur,role,nbaction,tresorp,capacite,seDeplacer3,assecher3,donnercarte3, carteHeli3, carteSac3;
-   private JComboBox JCTuiledep,JCaventurierREC,JCCartedon,JCTuileass,carteHeli2,JCTuileassSAC,jMessager,cMessager,tuile1,tuile2,tPilote;
-   private JButton voirCartes, seDeplacer, donner, assecher, BoutonHelico, carteSac, prendre, passerTour, valider,boutonpilote;
-   private Aventurier av;
-   private Controleur c;
-   
-   
-   public newVueAventurier(Aventurier av, Controleur c) {
-        this.av=av;
-        this.c=c;
+
+    private JFrame fenetre;
+    private JPanel info;
+    private JPanel action;
+    private JPanel Sedeplacer, Secher, Donner, Autrechoix, Helicopter, SacdeSable;
+    private JPanel special;
+    private JPanel bot;
+    private JLabel joueur, role, nbaction, tresorp, capacite, seDeplacer3, assecher3, donnercarte3, carteHeli3, carteSac3;
+    private JComboBox JCTuiledep, JCaventurierREC, JCCartedon, JCTuileass, carteHeli2, JCTuileassSAC, jMessager, cMessager, tuile1, tuile2, tPilote, JCtuileingenieur;
+    private JButton voirCartes, seDeplacer, donner, assecher, BoutonHelico, carteSac, prendre, passerTour, valider, boutonpilote;
+    private Aventurier av;
+    private Controleur c;
+
+    public newVueAventurier(Aventurier av, Controleur c) {
+        this.av = av;
+        this.c = c;
         fenetre = new JFrame("L'île Perdue : jouer coup");
         this.configureWindow(fenetre);
         voirCartes = new JButton("Voir Cartes");
@@ -49,37 +49,32 @@ public class newVueAventurier extends Observe {
         carteSac = new JButton("Secher");
         prendre = new JButton("Prendre Trésor");
         passerTour = new JButton("Passer Son Tour");
-        
-        
-        
-        
-        
-        if(c.posssedeSdS().contains(av)){
+
+        if (c.posssedeSdS().contains(av)) {
             carteSac.setEnabled(true);
-        }else{
+        } else {
             carteSac.setEnabled(false);
         };
-        
-        
-         if(c.posssedeHelico().contains(av)){
+
+        if (c.posssedeHelico().contains(av)) {
             BoutonHelico.setEnabled(true);
-        }else{
+        } else {
             BoutonHelico.setEnabled(false);
         };
-        
+
         Border blackline = BorderFactory.createLineBorder(Color.black);
-               seDeplacer.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("test");
-                    Message m = new Message();    
-                    m.av= getAv();
-                    m.action = "seDeplacer";
-                    m.tuile = (Tuile) JCTuiledep.getSelectedItem();                 
-                    m.type = TypesMessage.JOUER_COUP;
-                    notifierObservateur(m);
-                }
-        }); 
-         /* 
+        seDeplacer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("test");
+                Message m = new Message();
+                m.av = getAv();
+                m.action = "seDeplacer";
+                m.tuile = (Tuile) JCTuiledep.getSelectedItem();
+                m.type = TypesMessage.JOUER_COUP;
+                notifierObservateur(m);
+            }
+        });
+        /* 
         voirCartes.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -88,18 +83,18 @@ public class newVueAventurier extends Observe {
                     notifierObservateur(m);
                 }
         });
-       */
+         */
         passerTour.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Message m = new Message();       
-                    m.action = "passerTour";                
-                    m.type = TypesMessage.JOUER_COUP;
-                    notifierObservateur(m);
-                }
-                
-                
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message();
+                m.av = av;
+                m.action = "passerTour";
+                m.type = TypesMessage.JOUER_COUP;
+                notifierObservateur(m);
+            }
+
         });
-         /* 
+        /* 
         donner.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -119,18 +114,21 @@ public class newVueAventurier extends Observe {
                     notifierObservateur(m);
                 }
         });
-        
+         */
         assecher.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    Message m = new Message();       
-                    m.action = "assecher";  
-                    m.av = av;
-                    m.tuile = (Tuile) tuile1.getSelectedItem();
-                    m.type = TypesMessage.JOUER_COUP;
-                    notifierObservateur(m);
+            public void actionPerformed(ActionEvent e) {
+                Message m = new Message();
+                m.action = "assecher";
+                m.av = av;
+                if (av.getRole() == "Ingénieur") {
+                    m.tuile2 = (Tuile) JCtuileingenieur.getSelectedItem();
                 }
+                m.tuile = (Tuile) JCTuileass.getSelectedItem();
+                m.type = TypesMessage.JOUER_COUP;
+                notifierObservateur(m);
+            }
         });
-        
+        /*
         carteHeli.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
@@ -160,14 +158,14 @@ public class newVueAventurier extends Observe {
                     notifierObservateur(m);
                 }
         }); */
-        
+
         joueur = new JLabel("Joueur : " + av.getNom());
         //joueur.setBackground(av.getCouleur());
         role = new JLabel("Rôle : " + av.getRole());
         nbaction = new JLabel("Nombre Action : " + av.getNbAction());
-        tresorp = new JLabel("Trésor possédé : "+ c.tresorjoueurs.toString());
+        tresorp = new JLabel("Trésor possédé : " + c.tresorjoueurs.toString());
         capacite = new JLabel("Capacité : "/* + av.getCapacite()*/);
-        
+
         info = new JPanel();
         info.setLayout(new GridLayout(5, 1));
         info.add(joueur);
@@ -176,116 +174,120 @@ public class newVueAventurier extends Observe {
         info.add(tresorp);
         info.add(capacite);
         info.setBorder(blackline);
-        
-        
-        
+
         action = new JPanel();
-        action.setLayout(new GridLayout(6,1));
-        
+        action.setLayout(new GridLayout(6, 1));
+
         Sedeplacer = new JPanel();
         seDeplacer3 = new JLabel("Se déplacer : ");
         JCTuiledep = new JComboBox();
-        for(Tuile t : c.tuilepossibledep(av)){
+        for (Tuile t : c.tuilepossibledep(av)) {
             JCTuiledep.addItem(t);
         }
         Sedeplacer.add(seDeplacer3);
         Sedeplacer.add(JCTuiledep);
         Sedeplacer.add(seDeplacer);
-        
-        
-        
-        
+
         Secher = new JPanel();
         assecher3 = new JLabel("Assècher : ");
         JCTuileass = new JComboBox();
-        for(Tuile t : c.tuileassechable(av)){
+        for (Tuile t : c.tuileassechable(av)) {
             JCTuileass.addItem(t);
         }
-        Secher.add(assecher3);
+
+        if (av.getRole() == "Ingénieur") {
+            JCtuileingenieur = new JComboBox();
+            
+            for (Tuile t : c.tuileassechable(av)) {
+            JCtuileingenieur.addItem(t);
+        }
+             Secher.add(assecher3);
+            Secher.add(JCtuileingenieur);
+           
         Secher.add(JCTuileass);
         Secher.add(assecher);
+        }else{
+            Secher.add(assecher3);
+        Secher.add(JCTuileass);
+        Secher.add(assecher);
+        }
         
-        
+
         Donner = new JPanel();
         donnercarte3 = new JLabel("Donner carte : ");
         JCaventurierREC = new JComboBox();
-       for(Aventurier t : c.joueursurtuile(av.getEmplacement())){
-            JCaventurierREC.addItem(av);
+        if (av.getRole() != "Messager") {
+            for (Aventurier t : c.joueursurtuile(av.getEmplacement())) {
+                if (t != av) {
+                    JCaventurierREC.addItem(av);
+                }
+            }
+        } else {
+            for (Aventurier t : c.joueurs) {
+                if (t != av) {
+                    JCaventurierREC.addItem(t);
+                }
+
         }
+        }
+    
+
         JCCartedon = new JComboBox();
-        for(CarteTresor l : av.cartes){
+        for (CarteTresor l : av.cartes) {
             JCCartedon.addItem(l);
         }
-        
-        
-        
+
         Donner.add(donnercarte3);
         Donner.add(JCaventurierREC);
         Donner.add(JCCartedon);
         Donner.add(donner);
-        
-        
-        
-        
+
         Helicopter = new JPanel();
         carteHeli3 = new JLabel("Helicoptère : ");
         carteHeli2 = new JComboBox();
-         for(Tuile t : c.caseinonde()){
+        for (Tuile t : c.caseinonde()) {
             carteHeli2.addItem(t);
         }
         SacdeSable = new JPanel();
         carteSac3 = new JLabel("Sac de sable : ");
         JCTuileassSAC = new JComboBox();
-        for(Tuile t : c.caseinonde()){
+        for (Tuile t : c.caseinonde()) {
             JCTuileassSAC.addItem(t);
         }
         Helicopter.add(carteHeli3);
         Helicopter.add(carteHeli2);
         Helicopter.add(BoutonHelico);
-        
-        
+
         SacdeSable.add(carteSac3);
         SacdeSable.add(JCTuileassSAC);
         SacdeSable.add(carteSac);
-        
+
         Autrechoix = new JPanel();
         Autrechoix.add(voirCartes);
         Autrechoix.add(prendre);
-        
+
         action.add(Sedeplacer);
         action.add(Secher);
         action.add(Donner);
-        
+
         action.add(Helicopter);
         action.add(SacdeSable);
         action.add(Autrechoix);
         action.setBorder(blackline);
-        
-        
-       
-        
-        
-        
-        
+
         bot = new JPanel();
         bot.setBorder(blackline);
         bot.add(passerTour);
-        
-        fenetre.setLayout(new GridLayout(3,1));
+
+        fenetre.setLayout(new GridLayout(3, 1));
         fenetre.add(info);
         fenetre.add(action);
-        
+
         fenetre.add(bot);
-        
-        
-        
-   
-    
-    
-   }
-   
-   
-   private void configureWindow(JFrame window) {
+
+    }
+
+    private void configureWindow(JFrame window) {
         window.setSize(500, 200);
         window.getContentPane().setLayout(new java.awt.BorderLayout());
         window.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
@@ -313,14 +315,13 @@ public class newVueAventurier extends Observe {
             }
         });
     }
-    
+
     public void afficher() {
         fenetre.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         fenetre.setSize(720, 1080);
-        fenetre.setVisible(true);                        
+        fenetre.setVisible(true);
     }
-    
-     
+
     public void setAv(Aventurier av) {
         this.av = av;
     }
@@ -332,34 +333,33 @@ public class newVueAventurier extends Observe {
     public Aventurier getAv() {
         return av;
     }
-    
-    
-    
-    public void actualiser(Controleur c ,Aventurier av){
-       this.setAv(av);
-       this.setC(c);
-       JCTuiledep.removeAllItems();
-       
-        for(Tuile t : c.tuilepossibledep(av)){
+
+    public void actualiser(Controleur c, Aventurier av) {
+        this.setAv(av);
+        this.setC(c);
+        JCTuiledep.removeAllItems();
+
+        for (Tuile t : c.tuilepossibledep(av)) {
             JCTuiledep.addItem(t);
         }
-        
-        nbaction.setText("Nombre Action : " + av.getNbAction());
-               
 
-       
-       
-       
-       
-       
-       
+        nbaction.setText("Nombre Action : " + av.getNbAction());
+
+        JCTuileass.removeAllItems();
+
+        for (Tuile t : c.tuileassechable(av)) {
+            JCTuileass.addItem(t);
+        }
+
+        if (av.getRole() == "Ingénieur") {
+            JCtuileingenieur.removeAllItems();
+            JCtuileingenieur = JCTuileass;
+        }
+
     }
-    
-    public void fermer(){
+
+    public void fermer() {
         fenetre.setVisible(false);
     }
-    
-    
-    
-    
+
 }
