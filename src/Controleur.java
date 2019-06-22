@@ -8,12 +8,12 @@ public class Controleur implements Observateur {
     ArrayList<Aventurier> joueurs = new ArrayList<>();
     ArrayList<CarteTresor> cartes = new ArrayList<>();
     ArrayList<CarteTresor> defosse = new ArrayList<>();
-    
+
     ArrayList<CarteInondation> cartesinnond = new ArrayList<>();
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
     ArrayList<Tresor> tresoresplateau = new ArrayList<>();
-     ArrayList<Tresor> tresorjoueurs = new ArrayList<>();
+    ArrayList<Tresor> tresorjoueurs = new ArrayList<>();
     ;
     
     private VueDemarrer ihmDem;
@@ -36,23 +36,18 @@ public class Controleur implements Observateur {
         g.générationgrille();
         this.setGrille(g);
         this.initterrain();
-        this.defosse= new ArrayList<>();
+        this.defosse = new ArrayList<>();
         this.defossecartinond = new ArrayList<>();
-       
-        
-        
-        
+
         this.setCartesinnond(this.Carteterraingen());
         this.initterrain();
         VueDemarrer ihmDem = new VueDemarrer();
-       // ihmAv = new VueAventurier();
-        
+        // ihmAv = new VueAventurier();
+
         this.setIhmDem(ihmDem);
         ihmDem.afficher();
         ihmDem.addObservateur(this);
-        
-       
-        
+
     }
 
     public VueDemarrer getIhmDem() {
@@ -62,7 +57,7 @@ public class Controleur implements Observateur {
     public void setIhmDem(VueDemarrer ihmDem) {
         this.ihmDem = ihmDem;
     }
-    
+
     public boolean PossibleDon(Aventurier joueurRec, Aventurier joueurEnv, CarteTresor cartetrésor) {
         // TODO - implement Controleur.PossibleDon
         if (joueurEnv.getRole() == "Messager") {
@@ -118,11 +113,11 @@ public class Controleur implements Observateur {
 
     }
 
-    public void prendretresor(Aventurier joueur, Tresor tresor) {
-
+    public void prendretresor(Aventurier joueur) {
+        Tresor tresor = joueur.getEmplacement().getTrésor();
         //V2
-        if (Possibleprisetrésor(joueur, tresor)) {
-           this.tresorjoueurs.add(tresor);
+        if (Possibleprisetrésor(joueur)) {
+            this.tresorjoueurs.add(tresor);
             this.tresoresplateau.remove(tresor);
             for (CarteTresor a : joueur.cartes) {
                 if (a.getT() == tresor) {
@@ -134,32 +129,32 @@ public class Controleur implements Observateur {
 
     }
 
-    public boolean Possibleprisetrésor(Aventurier joueur, Tresor tresor) {
+    public boolean Possibleprisetrésor(Aventurier joueur) {
         // TODO - implement Controleur.Possibleprisetrésor
         int i = 0;
         boolean a = false;
-        for (CarteTresor c : joueur.cartes) {
-            if (c.getT() == tresor) {
-                i = i + 1;
-            }
-        }
-        if (i >= 4) {
-            for (Tuile t : grille.TuileTresor(tresor)) {
-                if (joueur.getEmplacement() == t && t.getEtatTuile() != EtatTuile.disparue) {
-                    a = true;
-
-                } else {
-                    a = false;
-
+        if (joueur.getEmplacement().getTrésor() != null) {
+            Tresor tresor = joueur.getEmplacement().getTrésor();
+            for (CarteTresor c : joueur.cartes) {
+                if (c.getT() == tresor) {
+                    i = i + 1;
                 }
             }
-        } else {
-            a = false;
+            if (i >= 4) {
+                a = true;
+        
+            } else {
+                a = false;
+            }
 
+            
+
+        }else { 
+            a = false;
         }
         return a;
-
     }
+    
 
     public ArrayList<String> randomrole() {
         ArrayList<String> roles = new ArrayList<>();
@@ -464,17 +459,18 @@ public class Controleur implements Observateur {
         }
         return l;
     }
-    public ArrayList<Aventurier> joueursurtuile(Tuile t){
-         ArrayList<Aventurier> l = new ArrayList<>();
-        for(Aventurier av : this.joueurs){
-            if(av.getEmplacement()==t){
+
+    public ArrayList<Aventurier> joueursurtuile(Tuile t) {
+        ArrayList<Aventurier> l = new ArrayList<>();
+        for (Aventurier av : this.joueurs) {
+            if (av.getEmplacement() == t) {
                 l.add(av);
             }
         }
         return l;
     }
-    
-     public ArrayList<Aventurier> posssedeHelico() {
+
+    public ArrayList<Aventurier> posssedeHelico() {
         ArrayList<Aventurier> l = new ArrayList<>();
 
         for (Aventurier o : this.getJoueurs()) {
@@ -496,57 +492,54 @@ public class Controleur implements Observateur {
             a = a + 1;
         }
     }
-    
-    public Aventurier joueursuivant(Aventurier av){
+
+    public Aventurier joueursuivant(Aventurier av) {
         Aventurier aven = null;
-         System.out.println(joueurs);
-        if(this.joueurs.indexOf(av)== this.joueurs.size() -1){
-            aven =  this.joueurs.get(0);
-      
-    }else if(this.joueurs.indexOf(av)< this.joueurs.size() -1) {
-            
-        int numsuivant = this.joueurs.indexOf(av) +1 ;
-        aven = this.joueurs.get(numsuivant);
+        System.out.println(joueurs);
+        if (this.joueurs.indexOf(av) == this.joueurs.size() - 1) {
+            aven = this.joueurs.get(0);
+
+        } else if (this.joueurs.indexOf(av) < this.joueurs.size() - 1) {
+
+            int numsuivant = this.joueurs.indexOf(av) + 1;
+            aven = this.joueurs.get(numsuivant);
         }
         return aven;
-        
+
     }
 
     public void supprimecarte(Aventurier av, CarteTresor t) {
         av.getCartes().remove(t);
         this.defosse.add(t);
     }
-    
-   
 
-     public void TirageCarteInondation(){
-                JOptionPane popup ;
-                int nivo = this.getEchelle().getGraduation();
-                int indcourant =1;
-                while(indcourant< nivo){
-                  Tuile tempo = this.getCartesinnond().get(0).getTuile();
-                  int tempot = this.grille.numTuile(tempo.getNom());
-                  if( this.grille.tuiles.get(tempot).getEtatTuile()==EtatTuile.seche){
-                  this.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.inondé);
-                  this.defossecartinond.add(this.getCartesinnond().get(0));
-                  popup = new JOptionPane();
-                  popup.showMessageDialog(null, "Vous avez pioché la carte inondation " +  this.getCartesinnond().get(0).getTuile().getNom() +"\n Elle devient donc inondé ", "Attention", JOptionPane.WARNING_MESSAGE);
-                  this.cartesinnond.remove(0);
-                 
-                  } else if( this.grille.tuiles.get(tempot).getEtatTuile()==EtatTuile.inondé) {
-                     this.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.disparue);
-                     popup = new JOptionPane();
-                  popup.showMessageDialog(null, "Vous avez pioché la carte inondation " +  this.getCartesinnond().get(0).getTuile().getNom() +"\n Elle a donc disparue", "Attention", JOptionPane.WARNING_MESSAGE);
-                     this.cartesinnond.remove(0);
-                  }
-                  indcourant=indcourant +1;
-     }
-     }
-                
+    public void TirageCarteInondation() {
+        JOptionPane popup;
+        int nivo = this.getEchelle().getGraduation();
+        int indcourant = 1;
+        while (indcourant < nivo) {
+            Tuile tempo = this.getCartesinnond().get(0).getTuile();
+            int tempot = this.grille.numTuile(tempo.getNom());
+            if (this.grille.tuiles.get(tempot).getEtatTuile() == EtatTuile.seche) {
+                this.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.inondé);
+                this.defossecartinond.add(this.getCartesinnond().get(0));
+                popup = new JOptionPane();
+                popup.showMessageDialog(null, "Vous avez pioché la carte inondation " + this.getCartesinnond().get(0).getTuile().getNom() + "\n Elle devient donc inondé ", "Attention", JOptionPane.WARNING_MESSAGE);
+                this.cartesinnond.remove(0);
+
+            } else if (this.grille.tuiles.get(tempot).getEtatTuile() == EtatTuile.inondé) {
+                this.grille.tuiles.get(tempot).setEtatTuile(EtatTuile.disparue);
+                popup = new JOptionPane();
+                popup.showMessageDialog(null, "Vous avez pioché la carte inondation " + this.getCartesinnond().get(0).getTuile().getNom() + "\n Elle a donc disparue", "Attention", JOptionPane.WARNING_MESSAGE);
+                this.cartesinnond.remove(0);
+            }
+            indcourant = indcourant + 1;
+        }
+    }
 
     public void traiterMessage(Message m) {
-        String difficulte,joueur1,joueur2,joueur3,joueur4,action;
-        
+        String difficulte, joueur1, joueur2, joueur3, joueur4, action;
+
         switch (m.type) {
             case DEMARRER_PARTIE:
                 difficulte = m.difficulte;
@@ -562,209 +555,239 @@ public class Controleur implements Observateur {
                 if ("Légendaire".equals(difficulte)) {
                     setEchelle(new Echelle(4));
                 }
-                
-                
-                
-                
-                int h=0;
-                
-                
-                
+
+                int h = 0;
+
                 ArrayList<String> randomrole = new ArrayList<>();
                 randomrole = this.randomrole();
-                
-                for(String str : m.joueur){
-                    
-                switch (randomrole.get(h)) {
-                case "Plongeur":
-                    
 
-                    Plongeur plongeur = new Plongeur(str);
-                   
+                for (String str : m.joueur) {
 
-                    ArrayList<Tuile> l = this.grille.getTuiles();
-                    Tuile a = l.get(this.grille.numTuile("La Porte de Fer"));
-                    plongeur.setEmplacement(a);
-                    this.joueurs.add(plongeur);
-                    
+                    switch (randomrole.get(h)) {
+                        case "Plongeur":
 
-                    break;
+                            Plongeur plongeur = new Plongeur(str);
 
-                case "Messager":
-                   
+                            ArrayList<Tuile> l = this.grille.getTuiles();
+                            Tuile a = l.get(this.grille.numTuile("La Porte de Fer"));
+                            plongeur.setEmplacement(a);
+                            this.joueurs.add(plongeur);
 
-                    Messager messager = new Messager(str);
-                    l = grille.getTuiles();
-                    Tuile b = l.get(grille.numTuile("La Porte d’Argent"));
-                    messager.setEmplacement(b);
-                    
-                    this.joueurs.add(messager);
+                            break;
 
-                    break;
+                        case "Messager":
 
-                case "Navigateur":
-                    
+                            Messager messager = new Messager(str);
+                            l = grille.getTuiles();
+                            Tuile b = l.get(grille.numTuile("La Porte d’Argent"));
+                            messager.setEmplacement(b);
 
-                    Navigateur navigateur = new Navigateur(str);
-                    l = grille.getTuiles();
-                    Tuile c = l.get(grille.numTuile("La Porte d’Or"));
-                    navigateur.setEmplacement(c);
-                    
-                    randomrole.remove(1);
-                    this.joueurs.add(navigateur);
+                            this.joueurs.add(messager);
 
-                    break;
+                            break;
 
-                case "Ingénieur":
-                    
+                        case "Navigateur":
 
-                    Ingenieur ingenieur = new Ingenieur(str);
-                    l = grille.getTuiles();
-                    Tuile d = l.get(grille.numTuile("La Porte de Bronze"));
-                    ingenieur.setEmplacement(d);
-                    
-                    this.joueurs.add(ingenieur);
+                            Navigateur navigateur = new Navigateur(str);
+                            l = grille.getTuiles();
+                            Tuile c = l.get(grille.numTuile("La Porte d’Or"));
+                            navigateur.setEmplacement(c);
 
-                    break;
+                            randomrole.remove(1);
+                            this.joueurs.add(navigateur);
 
-                case "Explorateur":
-                    
+                            break;
 
-                    Explorateur explorateur = new Explorateur(str);
-                    l = grille.getTuiles();
-                    Tuile e = l.get(grille.numTuile("La Porte de Cuivre"));
-                    explorateur.setEmplacement(e);
+                        case "Ingénieur":
 
-                    
-                     this.joueurs.add(explorateur);
+                            Ingenieur ingenieur = new Ingenieur(str);
+                            l = grille.getTuiles();
+                            Tuile d = l.get(grille.numTuile("La Porte de Bronze"));
+                            ingenieur.setEmplacement(d);
 
-                    break;
+                            this.joueurs.add(ingenieur);
 
-                case "Pilote":
-                    
+                            break;
 
-                    Pilote pilote = new Pilote(str);
-                    l = grille.getTuiles();
-                    Tuile f = l.get(grille.numTuile("Heliport"));
-                    pilote.setEmplacement(f);
-                    
-                     this.joueurs.add(pilote);
+                        case "Explorateur":
 
-                    break;
+                            Explorateur explorateur = new Explorateur(str);
+                            l = grille.getTuiles();
+                            Tuile e = l.get(grille.numTuile("La Porte de Cuivre"));
+                            explorateur.setEmplacement(e);
 
-            }
-                h=h+1;
+                            this.joueurs.add(explorateur);
+
+                            break;
+
+                        case "Pilote":
+
+                            Pilote pilote = new Pilote(str);
+                            l = grille.getTuiles();
+                            Tuile f = l.get(grille.numTuile("Heliport"));
+                            pilote.setEmplacement(f);
+
+                            this.joueurs.add(pilote);
+
+                            break;
+
+                    }
+                    h = h + 1;
                 }
-                
-                
-                 System.out.println(joueurs);
+
+                System.out.println(joueurs);
                 this.attributioncart();
                 ihmDem.demarrerJeu();
                 ihmDem.fermer();
-                ihmAv = new  newVueAventurier(joueurs.get(0),this);
+                ihmAv = new newVueAventurier(joueurs.get(0), this);
                 ihmAv.addObservateur(this);
                 ihmAv.afficher();
-               
+
                 break;
-                
+
             case JOUER_COUP:
 
                 action = m.action;
                 if ("seDeplacer".equals(action)) {
                     m.av.getEmplacement().affiche();
-                   joueurs.get(numAventurier(m.av.getNom())).setEmplacement(m.tuile);
-                   
-                   joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
-                   m.av.getEmplacement().affiche();
-                   ihmAv.fermer();
-                   ihmAv.actualiser(this, m.av);
-                   ihmAv.afficher();
-                   if(m.av.getNbAction()==0){
-                       
-                       joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
-                       ihmAv.fermer();
-                       
-                       //Tirelescartesinondations
-                       TirageCarteInondation();
-                       //Mettre a jour la grille + 
-                       
-                       this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
-                       ihmAv.addObservateur(this);
-                       ihmAv.afficher();
-                   }
-                                    }
+                    joueurs.get(numAventurier(m.av.getNom())).setEmplacement(m.tuile);
+
+                    joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
+                    m.av.getEmplacement().affiche();
+                    ihmAv.fermer();
+                    ihmAv.actualiser(this, m.av);
+                    ihmAv.afficher();
+                    if (m.av.getNbAction() == 0) {
+
+                        joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
+                        ihmAv.fermer();
+
+                        //Tirelescartesinondations
+                        TirageCarteInondation();
+                        //Mettre a jour la grille + 
+
+                        this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
+                        ihmAv.addObservateur(this);
+                        ihmAv.afficher();
+                    }
+                }
                 if ("voirCartes".equals(action)) {
                     // Faire une fenetre avec les Cartes
                 }
                 if ("prendre".equals(action)) {
+                    JOptionPane popup;
+                    prendretresor(m.av);
+                    joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
+                    popup = new JOptionPane();
+                    popup.showMessageDialog(null, "Felicatation vous avez obtenue le tresor " + m.av.getEmplacement().getTrésor().getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
+                    ihmAv.fermer();
+                    ihmAv.actualiser(this, m.av);
+                    ihmAv.afficher();
+                    
+                    if (m.av.getNbAction() == 0) {
+
+                        joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
+                        ihmAv.fermer();
+
+                        //Tirelescartesinondations
+                        TirageCarteInondation();
+                        //Mettre a jour la grille + 
+
+                        this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
+                        ihmAv.addObservateur(this);
+                        ihmAv.afficher();
+                    }
+                    
                     
                 }
                 if ("donner".equals(action)) {
-                    
+
                 }
                 if ("carteHeli".equals(action)) {
-                    
+
                 }
                 if ("carteSac".equals(action)) {
-                    
-                }
-                if ("assecher".equals(action)) {
                     JOptionPane popup;
-                   if(m.av.getRole()=="Ingénieur"){
-                       int numtuile2 =grille.numTuile(m.tuile2.getNom());
-                       this.grille.tuiles.get(numtuile2).setEtatTuile(EtatTuile.seche);
-                        popup = new JOptionPane();
-                  popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile2.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
-                  //Actualiser la grille 
-                  
-                   }    
-                       int numtuile =grille.numTuile(m.tuile.getNom());
-                       this.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
-                        popup = new JOptionPane();
-                  popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
-                       joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
-                       ihmAv.fermer();
-                       //Actualiser la grille 
-                       ihmAv.actualiser(this, m.av);
-                       ihmAv.afficher();
-                       
-                       if(m.av.getNbAction()==0){
-                       
-                       joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
-                       ihmAv.fermer();
-                       
-                       //Tirelescartesinondations
-                       TirageCarteInondation();
-                       //Mettre a jour la grille + 
-                       
-                       this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
-                       ihmAv.addObservateur(this);
-                       ihmAv.afficher();
-                       
-                       
-                       
-                   }
-                   
+                    int numtuile = grille.numTuile(m.tuile.getNom());
+                    this.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
+                    popup = new JOptionPane();
+                    popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
                     
+                    supprimecarte( joueurs.get(numAventurier(m.av.getNom())), m.cartetresor);
+                    
+                    ihmAv.fermer();
+                    //Actualiser la grille 
+                    ihmAv.actualiser(this, m.av);
+                    ihmAv.afficher();
+
+                    if (m.av.getNbAction() == 0) {
+
+                        joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
+                        ihmAv.fermer();
+
+                        //Tirelescartesinondations
+                        TirageCarteInondation();
+                        //Mettre a jour la grille + 
+
+                        this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
+                        ihmAv.addObservateur(this);
+                        ihmAv.afficher();
+
+                    }    
+
+                }
+                if ("assecher".equals(action) ) {
+                    JOptionPane popup;
+                    if (m.av.getRole() == "Ingénieur") {
+                        int numtuile2 = grille.numTuile(m.tuile2.getNom());
+                        this.grille.tuiles.get(numtuile2).setEtatTuile(EtatTuile.seche);
+                        popup = new JOptionPane();
+                        popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile2.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
+                        //Actualiser la grille 
+
+                    }
+                    int numtuile = grille.numTuile(m.tuile.getNom());
+                    this.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
+                    popup = new JOptionPane();
+                    popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
+                    joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
+                    ihmAv.fermer();
+                    //Actualiser la grille 
+                    ihmAv.actualiser(this, m.av);
+                    ihmAv.afficher();
+
+                    if (m.av.getNbAction() == 0) {
+
+                        joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
+                        ihmAv.fermer();
+
+                        //Tirelescartesinondations
+                        TirageCarteInondation();
+                        //Mettre a jour la grille + 
+
+                        this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
+                        ihmAv.addObservateur(this);
+                        ihmAv.afficher();
+
+                    }
+
                 }
                 if ("passerTour".equals(action)) {
-                    
-                        ihmAv.fermer();
-                       
-                       //Tirelescartesinondations
-                       TirageCarteInondation();
-                       //Mettre a jour la grille + 
-                       
-                       this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
-                       ihmAv.addObservateur(this);
-                       ihmAv.afficher();
+
+                    ihmAv.fermer();
+
+                    //Tirelescartesinondations
+                    TirageCarteInondation();
+                    //Mettre a jour la grille + 
+
+                    this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
+                    ihmAv.addObservateur(this);
+                    ihmAv.afficher();
                 }
-                
+
                 break;
-                
+
         }
     }
-    
-    
-    
+
 }

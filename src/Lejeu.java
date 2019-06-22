@@ -465,8 +465,8 @@ public class Lejeu {
                             break;
                         case 7:
                             if (av.getEmplacement().getTrésor() != null) {
-                                if (controleur.Possibleprisetrésor(av, av.getEmplacement().getTrésor())) {
-                                    controleur.prendretresor(av, av.getEmplacement().getTrésor());
+                                if (controleur.Possibleprisetrésor(av)) {
+                                    controleur.prendretresor(av);
                                     System.out.println("Felicitation vous avez le pris le tresor"
                                             + " " + av.getEmplacement().getTrésor().getNom());
                                     nbaction = nbaction + 1;

@@ -50,6 +50,15 @@ public class newVueAventurier extends Observe {
         prendre = new JButton("Prendre Trésor");
         passerTour = new JButton("Passer Son Tour");
 
+        
+       
+        
+         if (c.Possibleprisetrésor(av)) {
+            prendre.setEnabled(true);
+        } else {
+            prendre.setEnabled(false);
+        };
+        
         if (c.posssedeSdS().contains(av)) {
             carteSac.setEnabled(true);
         } else {
@@ -139,12 +148,14 @@ public class newVueAventurier extends Observe {
                     notifierObservateur(m);
                 }
         });
-        
+        */
         carteSac.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
                     m.action = "carteSac";    
-                    m.tuile = (Tuile) tuile2.getSelectedItem();
+                    m.av=av;
+                    m.cartetresor = av.cartes.get(av.numcarte("Sac de Sable"));
+                    m.tuile = (Tuile) JCTuileassSAC.getSelectedItem();
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
@@ -153,11 +164,12 @@ public class newVueAventurier extends Observe {
         prendre.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
-                    m.action = "prendre";    
+                    m.action = "prendre";   
+                    m.av=av;
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
-        }); */
+        }); 
 
         joueur = new JLabel("Joueur : " + av.getNom());
         //joueur.setBackground(av.getCouleur());
@@ -342,7 +354,13 @@ public class newVueAventurier extends Observe {
         for (Tuile t : c.tuilepossibledep(av)) {
             JCTuiledep.addItem(t);
         }
+        JCTuileassSAC.removeAllItems();
+        
 
+        for (Tuile t : c.caseinonde()) {
+            JCTuileassSAC.addItem(t);
+        }
+        
         nbaction.setText("Nombre Action : " + av.getNbAction());
 
         JCTuileass.removeAllItems();
@@ -355,6 +373,24 @@ public class newVueAventurier extends Observe {
             JCtuileingenieur.removeAllItems();
             JCtuileingenieur = JCTuileass;
         }
+        
+        if (c.Possibleprisetrésor(av)) {
+            prendre.setEnabled(true);
+        } else {
+            prendre.setEnabled(false);
+        };
+        
+        if (c.posssedeSdS().contains(av)) {
+            carteSac.setEnabled(true);
+        } else {
+            carteSac.setEnabled(false);
+        };
+
+        if (c.posssedeHelico().contains(av)) {
+            BoutonHelico.setEnabled(true);
+        } else {
+            BoutonHelico.setEnabled(false);
+        };
 
     }
 
