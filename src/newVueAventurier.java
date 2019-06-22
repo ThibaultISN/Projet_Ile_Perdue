@@ -165,7 +165,7 @@ public class newVueAventurier extends Observe {
         //joueur.setBackground(av.getCouleur());
         role = new JLabel("Rôle : " + av.getRole());
         nbaction = new JLabel("Nombre Action : " + av.getNbAction());
-        tresorp = new JLabel("Trésor possédé : "+ av.getTresor().toString());
+        tresorp = new JLabel("Trésor possédé : "+ c.tresorjoueurs.toString());
         capacite = new JLabel("Capacité : "/* + av.getCapacite()*/);
         
         info = new JPanel();
@@ -343,6 +343,10 @@ public class newVueAventurier extends Observe {
         for(Tuile t : c.tuilepossibledep(av)){
             JCTuiledep.addItem(t);
         }
+        
+        nbaction.setText("Nombre Action : " + av.getNbAction());
+               
+
        
        
        

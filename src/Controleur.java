@@ -11,8 +11,8 @@ public class Controleur implements Observateur {
     ArrayList<CarteInondation> cartesinnond = new ArrayList<>();
     ArrayList<CarteInondation> defossecartinond = new ArrayList<>();
     Echelle echelle;
-    ArrayList<Tresor> tresores = new ArrayList<>();
-    
+    ArrayList<Tresor> tresoresplateau = new ArrayList<>();
+     ArrayList<Tresor> tresorjoueurs = new ArrayList<>();
     ;
     
     private VueDemarrer ihmDem;
@@ -24,10 +24,10 @@ public class Controleur implements Observateur {
      * @param cartetrésor
      */
     public Controleur() {
-        getTresores().add(new Tresor("flamme"));
-        getTresores().add(new Tresor("lune"));
-        getTresores().add(new Tresor("lion"));
-        getTresores().add(new Tresor("coupe"));
+        getTresoresplateau().add(new Tresor("flamme"));
+        getTresoresplateau().add(new Tresor("lune"));
+        getTresoresplateau().add(new Tresor("lion"));
+        getTresoresplateau().add(new Tresor("coupe"));
         initcart();
         defosse = new ArrayList<>();
         defossecartinond = new ArrayList<>();
@@ -121,8 +121,8 @@ public class Controleur implements Observateur {
 
         //V2
         if (Possibleprisetrésor(joueur, tresor)) {
-            joueur.addTresor(tresor);
-            this.tresores.remove(tresor);
+           this.tresorjoueurs.add(tresor);
+            this.tresoresplateau.remove(tresor);
             for (CarteTresor a : joueur.cartes) {
                 if (a.getT() == tresor) {
                     this.defosse.add(a);
@@ -214,12 +214,12 @@ public class Controleur implements Observateur {
         this.echelle = echelle;
     }
 
-    public ArrayList<Tresor> getTresores() {
-        return tresores;
+    public ArrayList<Tresor> getTresoresplateau() {
+        return tresoresplateau;
     }
 
-    public void setTresores(ArrayList<Tresor> tresores) {
-        this.tresores = tresores;
+    public void setTresoresplateau(ArrayList<Tresor> tresoresplateau) {
+        this.tresoresplateau = tresoresplateau;
     }
 
     //Initialise le paquet de carte et mélanger
@@ -498,13 +498,14 @@ public class Controleur implements Observateur {
     
     public Aventurier joueursuivant(Aventurier av){
         Aventurier aven = null;
-        
-        if(this.joueurs.indexOf(av)< joueurs.size()){
-       int numsuivant = this.joueurs.indexOf(av) +1 ;
+         System.out.println(joueurs);
+        if(this.joueurs.indexOf(av)== this.joueurs.size() -1){
+            aven =  this.joueurs.get(0);
+      
+    }else if(this.joueurs.indexOf(av)< this.joueurs.size() -1) {
+            
+        int numsuivant = this.joueurs.indexOf(av) +1 ;
         aven = this.joueurs.get(numsuivant);
-    }else if (this.joueurs.indexOf(av)== this.joueurs.size()){
-            int numsuivant = 0;
-           aven =  this.joueurs.get(numsuivant);
         }
         return aven;
         
@@ -651,8 +652,11 @@ public class Controleur implements Observateur {
                    ihmAv.actualiser(this, m.av);
                    ihmAv.afficher();
                    if(m.av.getNbAction()==0){
+                       
+                       joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
                        ihmAv.fermer();
                        this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
+                       ihmAv.addObservateur(this);
                        ihmAv.afficher();
                    }
                                     }
@@ -677,7 +681,7 @@ public class Controleur implements Observateur {
                 }
                 if ("passerTour".equals(action)) {
                     
-                     ihmAv.fermer();
+                     
                        this.ihmAv = new newVueAventurier(joueursuivant(m.av),this);
                        ihmAv.afficher();
                 }

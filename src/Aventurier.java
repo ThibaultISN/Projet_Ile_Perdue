@@ -181,6 +181,10 @@ public abstract class Aventurier {
         return (listconti.contains(this.getEmplacement()));
         
     }
+
+    void rendrenbaciton() {
+        this.nbAction=3;
+    }
       
       
 }
