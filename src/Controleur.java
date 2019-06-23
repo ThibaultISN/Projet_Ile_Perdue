@@ -18,6 +18,7 @@ public class Controleur implements Observateur {
     
     private VueDemarrer ihmDem;
     private newVueAventurier ihmAv;
+    private VueDeck ihmcarte;
 
     /**
      *
@@ -230,22 +231,22 @@ public class Controleur implements Observateur {
             }
        } */
         while (i < 5) {
-            getCartes().add(new CarteTresor("flamme"));
+            getCartes().add(new CarteTresor("flamme",new Tresor("flamme")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("lune"));
+            getCartes().add(new CarteTresor("lune",new Tresor("lune")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("lion"));
+            getCartes().add(new CarteTresor("lion",new Tresor("lion")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("coupe"));
+            getCartes().add(new CarteTresor("coupe",new Tresor("coupe")));
             i = i + 1;
         }
 
@@ -671,8 +672,9 @@ public class Controleur implements Observateur {
                         ihmAv.afficher();
                     }
                 }
-                if ("voirCartes".equals(action)) {
-                    // Faire une fenetre avec les Cartes
+                if ("voir".equals(action)) {
+                    this.ihmcarte = new VueDeck(m.av, Boolean.FALSE);
+                    ihmcarte.afficher();
                 }
                 if ("prendre".equals(action)) {
                     JOptionPane popup;

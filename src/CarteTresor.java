@@ -14,6 +14,13 @@ public class CarteTresor {
     
      public CarteTresor(String type) {
         this.type = type;
+       
+    }
+     
+     public CarteTresor(String type , Tresor t) {
+        this.type = type;
+         setT(t);
+       
     }
 
     public String getType() {
@@ -23,7 +30,7 @@ public class CarteTresor {
     public void setType(String type) {
         this.type = type;
     }
-
+ 
     @Override
     public String toString() {
         return this.getType();

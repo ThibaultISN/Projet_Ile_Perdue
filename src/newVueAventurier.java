@@ -83,16 +83,17 @@ public class newVueAventurier extends Observe {
                 notifierObservateur(m);
             }
         });
-        /* 
+        
         voirCartes.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     Message m = new Message();       
-                    m.action = "voir";                
+                    m.action = "voir";  
+                    m.av=av;
                     m.type = TypesMessage.JOUER_COUP;
                     notifierObservateur(m);
                 }
         });
-         */
+         
         passerTour.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 Message m = new Message();
