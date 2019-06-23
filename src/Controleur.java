@@ -259,7 +259,8 @@ public class Controleur implements Observateur {
 
         getCartes().add(new CarteTresor("Monté des eaux"));
         getCartes().add(new CarteTresor("Monté des eaux"));
-        getCartes().add(new CarteTresor("Monté des eaux"));
+        
+        //getCartes().add(new CarteTresor("Monté des eaux"));
 
         Collections.shuffle(getCartes());
     }

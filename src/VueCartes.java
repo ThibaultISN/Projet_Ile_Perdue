@@ -32,7 +32,16 @@ public class VueCartes extends JPanel {
         Border blackline = BorderFactory.createLineBorder(Color.black);
         if (c.getT() != null) {
             switch (c.getType()) {
-                case "flamme":
+                
+                case "Sac de Sable":System.out.println("sac");
+                    img = new ImageIcon(new ImageIcon("src/cartes/SacsDeSable.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
+                    JL = new JLabel(img, JLabel.CENTER);
+                    System.out.println("test");
+                    this.add(JL);
+                    this.setBorder(blackline);
+                    break;
+                    
+                case "flamme":System.out.println("flamme");
                     img = new ImageIcon(new ImageIcon("src/cartes/Cristal.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
                     JL = new JLabel(img, JLabel.CENTER);
                     this.add(JL);
@@ -54,6 +63,7 @@ public class VueCartes extends JPanel {
                     break;
 
                 case "lune":
+                     
                     img = new ImageIcon(new ImageIcon("src/cartes/Pierre.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
 
                     JL = new JLabel(img, JLabel.CENTER);
@@ -61,21 +71,36 @@ public class VueCartes extends JPanel {
                     this.setBorder(blackline);
                     break;
 
-                case "Sac de Sable":
-                    img = new ImageIcon(new ImageIcon("src/cartes/SacsDeSable.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
-                    JL = new JLabel(img, JLabel.CENTER);
-                    this.add(JL);
-                    this.setBorder(blackline);
-                    break;
+               
 
                 case "Helicopter":
-                    img = new ImageIcon(new ImageIcon("src/cartes/Helicoptere.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
+                     System.out.println("Helico");
+                    img = new ImageIcon(new ImageIcon("src/cartes/helico.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
                     JL = new JLabel(img, JLabel.CENTER);
+                    
                     this.add(JL);
                     this.setBorder(blackline);
                     break;
 
             }
+            
+            if(c.getType() == "Helicopter"){
+                System.out.println("Helico");
+                    img = new ImageIcon(new ImageIcon("src/cartes/helico.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
+                    JL = new JLabel(img, JLabel.CENTER);
+                    
+                    this.add(JL);
+                    this.setBorder(blackline);
+            }
+            
+            if(c.getType() == "Sac de Sable"){
+                 img = new ImageIcon(new ImageIcon("src/cartes/SacsDeSable.png").getImage().getScaledInstance(imgWidth, imgHeigh, Image.SCALE_SMOOTH));
+                    JL = new JLabel(img, JLabel.CENTER);
+                    System.out.println("test");
+                    this.add(JL);
+                    this.setBorder(blackline);
+            }
+            
         }
 
     }
