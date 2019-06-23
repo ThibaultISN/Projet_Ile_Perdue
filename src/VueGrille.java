@@ -21,8 +21,8 @@ public class VueGrille {
     private JPanel jp;
     private JPanel jborderleft;
     private ArrayList<VueTuile> listetuile ;
-    public VueGrille(Grille g) {
-        setG(g);
+    public VueGrille(Controleur c) {
+        setG(c.grille);
         jp = new JPanel();
         jborderleft = new JPanel();
         this.window = new JFrame();
@@ -37,48 +37,48 @@ public class VueGrille {
                 int a =0;
                 jp.add(new VueTuile());
                 jp.add(new VueTuile());
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+                jp.add(new VueTuile(g.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(g.tuiles.get(a),c));a=a+1;
                 jp.add(new VueTuile());
                 jp.add(new VueTuile());
                 
                 // ligne 2
                 jp.add(new VueTuile());
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
                  jp.add(new VueTuile());
                  
                  //ligne 3
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+                 jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                 jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
                 
                  //ligne 4
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                 jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+               jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                 jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
                 
                 //ligne 5
-                 jp.add(new VueTuile());
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+                  jp.add(new VueTuile());
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
                  jp.add(new VueTuile());
                  
                  //ligne 6
                 jp.add(new VueTuile());
                 jp.add(new VueTuile());
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
-                jp.add(new VueTuile(g.tuiles.get(a)));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
+                jp.add(new VueTuile(c.grille.tuiles.get(a),c));a=a+1;
                 jp.add(new VueTuile());
                 jp.add(new VueTuile());
             
@@ -134,6 +134,16 @@ public class VueGrille {
 
     public JFrame getWindow() {
         return window;
+    }
+    
+     public void afficher() {
+        window.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
+        window.setSize(1080 , 720);
+        window.setVisible(true);
+    }
+    
+    public void fermer() {
+        window.setVisible(false);
     }
     
 }

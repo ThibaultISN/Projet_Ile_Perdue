@@ -641,6 +641,10 @@ public class Controleur implements Observateur {
                 ihmAv = new newVueAventurier(joueurs.get(0), this);
                 ihmAv.addObservateur(this);
                 ihmAv.afficher();
+                
+                vuegrille = new VueGrille(this);
+                vuegrille.afficher(); 
+               // vuegrille.getWindow().setVisible(true);
 
                 break;
 
@@ -656,6 +660,9 @@ public class Controleur implements Observateur {
                     ihmAv.fermer();
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                    vuegrille = new VueGrille(this);
+                    vuegrille.afficher();
+                    
                     if (m.av.getNbAction() == 0) {
 
                         joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
@@ -686,6 +693,8 @@ public class Controleur implements Observateur {
                     ihmAv.fermer();
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                     vuegrille = new VueGrille(this);
+                    vuegrille.afficher();
 
                     if (m.av.getNbAction() == 0) {
 
@@ -724,6 +733,8 @@ public class Controleur implements Observateur {
                     //Actualiser la grille
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                     vuegrille = new VueGrille(this);
+                    vuegrille.afficher();
 
                     if (m.av.getNbAction() == 0) {
 
@@ -750,6 +761,8 @@ public class Controleur implements Observateur {
                         popup = new JOptionPane();
                         popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile2.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
                         //Actualiser la grille
+                         vuegrille = new VueGrille(this);
+                    vuegrille.afficher();
 
                     }
                     int numtuile = grille.numTuile(m.tuile.getNom());

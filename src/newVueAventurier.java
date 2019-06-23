@@ -11,10 +11,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.ComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -177,7 +179,61 @@ public class newVueAventurier extends Observe {
         role = new JLabel("Rôle : " + av.getRole());
         nbaction = new JLabel("Nombre Action : " + av.getNbAction());
         tresorp = new JLabel("Trésor possédé : " + c.tresorjoueurs.toString());
-        capacite = new JLabel("Capacité : "/* + av.getCapacite()*/);
+        
+       /*  ImageIcon img;
+        switch (av.getRole()) {
+                        
+                    case "Pilote":
+
+                        img = new ImageIcon(new ImageIcon("src/personnages/pilote.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                        
+                        break;
+                    case "Messager":
+
+                        img = new ImageIcon(new ImageIcon("src/personnages/messager.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                       
+                        break;
+                    case "Navigateur":
+
+                        img = new ImageIcon(new ImageIcon("src/personnages/navigateur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                        
+                        break;
+                    case "Plongeur":
+
+                        img = new ImageIcon(new ImageIcon("src/personnages/plongeur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                        
+                        break;
+                    case "Explorateur":
+
+                       img = new ImageIcon(new ImageIcon("src/personnages/explorateur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                        
+                        break;
+                    case "Ingenieur":
+
+                        img = new ImageIcon(new ImageIcon("src/personnages/ingenieur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        capacite = new JLabel(img, JLabel.CENTER);
+                        System.out.println("test");
+                        fenetre.add(capacite);
+                        
+                        break;
+
+                }
+*/
 
         info = new JPanel();
         info.setLayout(new GridLayout(5, 1));
@@ -185,7 +241,7 @@ public class newVueAventurier extends Observe {
         info.add(role);
         info.add(nbaction);
         info.add(tresorp);
-        info.add(capacite);
+       // info.add(capacite);
         info.setBorder(blackline);
 
         action = new JPanel();

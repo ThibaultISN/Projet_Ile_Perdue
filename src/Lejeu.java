@@ -193,8 +193,8 @@ public class Lejeu {
 
         }*/
         controleur.affichegrille();
-        VueGrille vg = new VueGrille(g);
-        vg.setG(controleur.grille); vg.getWindow().setVisible(true);
+       
+       // vg.setG(controleur.grille); vg.getWindow().setVisible(true);
         System.out.println("LA PARTIE VA DEBUTE");
         System.out.println(controleur.getJoueurs().size());
 
