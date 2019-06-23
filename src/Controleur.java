@@ -660,6 +660,7 @@ public class Controleur implements Observateur {
                     ihmAv.fermer();
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                    vuegrille.fermer();
                     vuegrille = new VueGrille(this);
                     vuegrille.afficher();
                     
@@ -733,6 +734,7 @@ public class Controleur implements Observateur {
                     //Actualiser la grille
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                    vuegrille.fermer();
                      vuegrille = new VueGrille(this);
                     vuegrille.afficher();
 
@@ -761,8 +763,7 @@ public class Controleur implements Observateur {
                         popup = new JOptionPane();
                         popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile2.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
                         //Actualiser la grille
-                         vuegrille = new VueGrille(this);
-                    vuegrille.afficher();
+                         
 
                     }
                     int numtuile = grille.numTuile(m.tuile.getNom());
@@ -774,6 +775,9 @@ public class Controleur implements Observateur {
                     //Actualiser la grille
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
+                    vuegrille.fermer();
+                    vuegrille = new VueGrille(this);
+                         vuegrille.afficher();
 
                     if (m.av.getNbAction() == 0) {
 

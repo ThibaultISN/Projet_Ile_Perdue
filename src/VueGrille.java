@@ -89,21 +89,21 @@ public class VueGrille {
         
          JPanel exemple1  = new JPanel();
          JPanel coulé = new JPanel();
-         coulé.setBackground(new Color(255,192,0));
+         coulé.setBackground(new Color(71, 108, 155));
          exemple1.add(coulé);
          exemple1.add(new JLabel("Case inondé"));
          
          
          JPanel exemple2  = new JPanel();
          JPanel seche = new JPanel();
-         seche.setBackground(new Color(151,71,6));
+         seche.setBackground(new Color(152, 68, 71));
          exemple2.add(seche);
          exemple2.add(new JLabel("Case seche"));
         
          
          JPanel exemple3  = new JPanel();
          JPanel disparue = new JPanel();
-         disparue.setBackground(new Color(141,180,226));
+         disparue.setBackground(new Color(16,20,25));
          exemple3.add(disparue);
          exemple3.add(new JLabel("Case disparue"));
          

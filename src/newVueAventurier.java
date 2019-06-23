@@ -12,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -179,69 +180,73 @@ public class newVueAventurier extends Observe {
         role = new JLabel("Rôle : " + av.getRole());
         nbaction = new JLabel("Nombre Action : " + av.getNbAction());
         tresorp = new JLabel("Trésor possédé : " + c.tresorjoueurs.toString());
-        
-       /*  ImageIcon img;
+        info = new JPanel();
+        info.setLayout(new BorderLayout());
+         ImageIcon img;
         switch (av.getRole()) {
                         
                     case "Pilote":
 
-                        img = new ImageIcon(new ImageIcon("src/personnages/pilote.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        img = new ImageIcon(new ImageIcon("src/personnages/pilote.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                         
                         break;
                     case "Messager":
 
-                        img = new ImageIcon(new ImageIcon("src/personnages/messager.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        img = new ImageIcon(new ImageIcon("src/personnages/messager.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                        
                         break;
                     case "Navigateur":
 
-                        img = new ImageIcon(new ImageIcon("src/personnages/navigateur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        img = new ImageIcon(new ImageIcon("src/personnages/navigateur.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                         
                         break;
                     case "Plongeur":
 
-                        img = new ImageIcon(new ImageIcon("src/personnages/plongeur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        img = new ImageIcon(new ImageIcon("src/personnages/plongeur.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                         
                         break;
                     case "Explorateur":
 
-                       img = new ImageIcon(new ImageIcon("src/personnages/explorateur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                       img = new ImageIcon(new ImageIcon("src/personnages/explorateur.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                         
                         break;
-                    case "Ingenieur":
+                    case "Ingénieur":
 
-                        img = new ImageIcon(new ImageIcon("src/personnages/ingenieur.png").getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+                        img = new ImageIcon(new ImageIcon("src/personnages/ingenieur.png").getImage().getScaledInstance(150, 210, Image.SCALE_SMOOTH));
                         capacite = new JLabel(img, JLabel.CENTER);
                         System.out.println("test");
-                        fenetre.add(capacite);
+                        info.add(capacite,BorderLayout.EAST);
                         
                         break;
 
                 }
-*/
 
-        info = new JPanel();
-        info.setLayout(new GridLayout(5, 1));
-        info.add(joueur);
-        info.add(role);
-        info.add(nbaction);
-        info.add(tresorp);
-       // info.add(capacite);
+
+        
+        
+        JPanel info2 = new JPanel(new GridLayout(4, 1));
+        info2.add(joueur);
+        info2.add(role);
+        info2.add(nbaction);
+        info2.add(tresorp);
+        
+        info.add(info2,BorderLayout.WEST);
+       
         info.setBorder(blackline);
 
         action = new JPanel();
