@@ -37,7 +37,7 @@ public class VueDeck extends Observe{
     this.av = av;
     fenetre.setTitle("Cartes de "+ av.getNom());
     fenetre.setSize(300, 300);
-    fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    fenetre.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     fenetre.setLocationRelativeTo(null);
         
         
@@ -123,7 +123,7 @@ public class VueDeck extends Observe{
        fenetre.removeAll();
        
           fenetre.setTitle("Cartes de "+ av.getNom());
-    fenetre.setSize(300, 300);
+    fenetre.setSize(900, 600);
     fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     fenetre.setLocationRelativeTo(null);
         
@@ -187,8 +187,12 @@ public class VueDeck extends Observe{
     }
     
     public void afficher() {
-        fenetre.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        fenetre.setSize(720, 1080);
+        fenetre.setDefaultCloseOperation(javax.swing.JFrame.HIDE_ON_CLOSE);
+        fenetre.setSize(900 , 600);
         fenetre.setVisible(true);
+    }
+    
+    public void fermer() {
+        fenetre.setVisible(false);
     }
 }

@@ -143,19 +143,16 @@ public class Controleur implements Observateur {
             }
             if (i >= 4) {
                 a = true;
-        
+
             } else {
                 a = false;
             }
 
-            
-
-        }else { 
+        } else {
             a = false;
         }
         return a;
     }
-    
 
     public ArrayList<String> randomrole() {
         ArrayList<String> roles = new ArrayList<>();
@@ -231,22 +228,22 @@ public class Controleur implements Observateur {
             }
        } */
         while (i < 5) {
-            getCartes().add(new CarteTresor("flamme",new Tresor("flamme")));
+            getCartes().add(new CarteTresor("flamme", new Tresor("flamme")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("lune",new Tresor("lune")));
+            getCartes().add(new CarteTresor("lune", new Tresor("lune")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("lion",new Tresor("lion")));
+            getCartes().add(new CarteTresor("lion", new Tresor("lion")));
             i = i + 1;
         }
         i = 0;
         while (i < 5) {
-            getCartes().add(new CarteTresor("coupe",new Tresor("coupe")));
+            getCartes().add(new CarteTresor("coupe", new Tresor("coupe")));
             i = i + 1;
         }
 
@@ -259,9 +256,8 @@ public class Controleur implements Observateur {
 
         getCartes().add(new CarteTresor("Monté des eaux"));
         getCartes().add(new CarteTresor("Monté des eaux"));
-        
+
         //getCartes().add(new CarteTresor("Monté des eaux"));
-
         Collections.shuffle(getCartes());
     }
 
@@ -667,6 +663,7 @@ public class Controleur implements Observateur {
                         //Tirelescartesinondations
                         TirageCarteInondation();
                         //Mettre a jour la grille + 
+                        tirercartetresor(joueurs.get(numAventurier(m.av.getNom())));
 
                         this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
                         ihmAv.addObservateur(this);
@@ -675,18 +672,20 @@ public class Controleur implements Observateur {
                 }
                 if ("voir".equals(action)) {
                     this.ihmcarte = new VueDeck(m.av, Boolean.FALSE);
+                    ihmcarte.addObservateur(this);
                     ihmcarte.afficher();
                 }
                 if ("prendre".equals(action)) {
                     JOptionPane popup;
                     prendretresor(m.av);
+                    ihmcarte.actualiser(m.av, Boolean.FALSE);
                     joueurs.get(numAventurier(m.av.getNom())).reduireNbAction();
                     popup = new JOptionPane();
                     popup.showMessageDialog(null, "Felicatation vous avez obtenue le tresor " + m.av.getEmplacement().getTrésor().getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
                     ihmAv.fermer();
                     ihmAv.actualiser(this, m.av);
                     ihmAv.afficher();
-                    
+
                     if (m.av.getNbAction() == 0) {
 
                         joueurs.get(numAventurier(m.av.getNom())).rendrenbaciton();
@@ -696,12 +695,14 @@ public class Controleur implements Observateur {
                         TirageCarteInondation();
                         //Mettre a jour la grille + 
 
+                        //Tirercartestresor
+                        tirercartetresor(joueurs.get(numAventurier(m.av.getNom())));
+
                         this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
                         ihmAv.addObservateur(this);
                         ihmAv.afficher();
                     }
-                    
-                    
+
                 }
                 if ("donner".equals(action)) {
 
@@ -715,9 +716,9 @@ public class Controleur implements Observateur {
                     this.grille.tuiles.get(numtuile).setEtatTuile(EtatTuile.seche);
                     popup = new JOptionPane();
                     popup.showMessageDialog(null, "Vous avez seché la tuile  " + m.tuile.getNom(), "Attention", JOptionPane.WARNING_MESSAGE);
-                    
-                    supprimecarte( joueurs.get(numAventurier(m.av.getNom())), m.cartetresor);
-                    
+
+                    supprimecarte(joueurs.get(numAventurier(m.av.getNom())), m.cartetresor);
+
                     ihmAv.fermer();
                     //Actualiser la grille 
                     ihmAv.actualiser(this, m.av);
@@ -731,15 +732,16 @@ public class Controleur implements Observateur {
                         //Tirelescartesinondations
                         TirageCarteInondation();
                         //Mettre a jour la grille + 
+                        tirercartetresor(joueurs.get(numAventurier(m.av.getNom())));
 
                         this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
                         ihmAv.addObservateur(this);
                         ihmAv.afficher();
 
-                    }    
+                    }
 
                 }
-                if ("assecher".equals(action) ) {
+                if ("assecher".equals(action)) {
                     JOptionPane popup;
                     if (m.av.getRole() == "Ingénieur") {
                         int numtuile2 = grille.numTuile(m.tuile2.getNom());
@@ -767,6 +769,7 @@ public class Controleur implements Observateur {
                         //Tirelescartesinondations
                         TirageCarteInondation();
                         //Mettre a jour la grille + 
+                        tirercartetresor(joueurs.get(numAventurier(m.av.getNom())));
 
                         this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
                         ihmAv.addObservateur(this);
@@ -782,15 +785,67 @@ public class Controleur implements Observateur {
                     //Tirelescartesinondations
                     TirageCarteInondation();
                     //Mettre a jour la grille + 
+                    tirercartetresor(joueurs.get(numAventurier(m.av.getNom())));
 
                     this.ihmAv = new newVueAventurier(joueursuivant(m.av), this);
                     ihmAv.addObservateur(this);
                     ihmAv.afficher();
                 }
 
+                if ("defosser".equals(action)) {
+
+                    supprimecarte(joueurs.get(numAventurier(m.av.getNom())), m.cartetresor);
+
+                    ihmcarte.fermer();
+                    ihmcarte = new VueDeck(this.joueurs.get(numAventurier(m.av.getNom())), Boolean.FALSE);
+                    
+                    ihmcarte.afficher();
+
+                }
                 break;
 
         }
+    }
+
+    public void tirercartetresor(Aventurier av) {
+        //si la liste est vide
+        if(this.cartes.isEmpty()){
+            this.cartes = (ArrayList<CarteTresor>) defosse.clone();
+            Collections.shuffle(cartes);
+        }
+
+        int num = 0;
+        if (this.getCartes().get(0).getType() == "Montée des eaux") {
+            System.out.println("Vous avez pioché une carte monté des eaux");
+            JOptionPane popup;
+            popup = new JOptionPane();
+            popup.showMessageDialog(null, "Vous avez pioché une cartes montée des eaux  le niveau d'eau est desormais de  " + this.echelle.getNiveau(), "Attention", JOptionPane.WARNING_MESSAGE);
+            this.defosse.add(this.getCartes().get(0));
+            this.cartes.remove(0);
+           
+            this.echelle.Monter();
+        } else {
+
+            av.cartes.add(this.getCartes().get(0));
+            this.cartes.remove(0);
+
+            if (av.getCartes().size() > 6) {
+                System.out.println("Vous avez trop de carte veuillez défosser");
+                this.ihmcarte = new VueDeck(av, Boolean.TRUE);
+                JOptionPane popup;
+                popup = new JOptionPane();
+                popup.showMessageDialog(null, "Veuillez défossé une carte" , "Attention", JOptionPane.WARNING_MESSAGE);
+                ihmcarte.afficher();
+                ihmcarte.addObservateur(this);
+
+            } else {
+                JOptionPane popup;
+                popup = new JOptionPane();
+                popup.showMessageDialog(null, "Vous avez obtenu la carte" + this.getCartes().get(0), "Attention", JOptionPane.WARNING_MESSAGE);
+            }
+
+        }
+
     }
 
 }
