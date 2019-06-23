@@ -11,11 +11,11 @@ public class Ingenieur extends Aventurier {
         
         Ingenieur(String nom){
             super.setNom(nom);
-             super.setRole("Ingenieur");
+             super.setRole("Ingénieur");
         }
         
          Ingenieur(){
-             super.setRole("Ingenieur");
+             super.setRole("Ingénieur");
              
             
         }

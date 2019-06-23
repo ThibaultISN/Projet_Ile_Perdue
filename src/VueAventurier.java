@@ -1,117 +1,215 @@
 
-
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.BorderFactory;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import static javax.swing.SwingConstants.CENTER;
-import javax.swing.border.MatteBorder;
+
+public class VueAventurier extends Observe {
+
+    private JButton commencer, voirCartes, seDeplacer2, donner, assecher, carteHeli, carteSac, prendre, passerTour;
+    private JLabel etatJeu;
+    private JComboBox seDeplacer,donner2,assecher2,carteHeli2,carteSac2;
+    private JFrame fenetre;
+    private JPanel panelH;
+    private JPanel panelB;
+    public static final int ETAT_ACTION = 1;
+    public static final int ETAT_GAGNANT = 2;
+    Aventurier av;
+    Controleur c ;
+
+    public VueAventurier(Aventurier av, Controleur c) {
+        this.av=av;
+        this.c=c;
+        fenetre = new JFrame("L'île Perdue : jouer coup");
+        this.configureWindow(fenetre);
+        voirCartes = new JButton("Voir Cartes");
+        seDeplacer2 = new JButton("Se Déplacer");
+        donner = new JButton("Donner Carte");
+        assecher = new JButton("Assécher Tuile");
+        carteHeli = new JButton("Utiliser Carte Helicoptère");
+        carteSac = new JButton("Utiliser Carte Sac de Sable");
+        prendre = new JButton("Prendre Trésor");
+        passerTour = new JButton("Passer Son Tour");
+        etatJeu = new JLabel("");
+        seDeplacer = new JComboBox(new String[]{""});
+        donner2 = new JComboBox(new String[]{""});
+        assecher2 = new JComboBox(new String[]{""});
+        carteHeli2 = new JComboBox(new String[]{""});
+        carteSac2 = new JComboBox(new String[]{""});
 
 
- 
-public class VueAventurier  {
-     
-    private final JPanel panelBoutons ;
-    private final JPanel panelCentre ;
-    private final JFrame window;
-    private final JPanel panelAventurier;
-    private final JPanel mainPanel;
-    private final JButton btnBouger  ;
-    private final JButton btnAssecher;
-    private final JButton btnAutreAction;
-    private final JButton btnTerminerTour;
-    private JTextField position;
-   
-   
-   
-    
-    public VueAventurier(String nomJoueur, String nomAventurier, Color couleur){
+        seDeplacer2.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "seDeplacer";
+                    m.tuile = (Tuile) seDeplacer.getSelectedItem();
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        this.window = new JFrame();
-        window.setSize(350, 200);
-        //le titre = nom du joueur 
-        window.setTitle(nomJoueur);
-        mainPanel = new JPanel(new BorderLayout());
-        this.window.add(mainPanel);
+        voirCartes.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "voir";
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        mainPanel.setBackground(new Color(230, 230, 230));
-        mainPanel.setBorder(BorderFactory.createLineBorder(couleur, 2)) ;
+        passerTour.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "passerTour";
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        // =================================================================================
-        // NORD : le titre = nom de l'aventurier sur la couleurActive du pion
+        donner.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "donner";
+                    m.don = (String) donner2.getSelectedItem();
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        this.panelAventurier = new JPanel();
-        panelAventurier.setBackground(couleur);
-        panelAventurier.add(new JLabel(nomAventurier,SwingConstants.CENTER ));
-        mainPanel.add(panelAventurier, BorderLayout.NORTH);
-   
-        // =================================================================================
-        // CENTRE : 1 ligne pour position courante
-        this.panelCentre = new JPanel(new GridLayout(2, 1));
-        this.panelCentre.setOpaque(false);
-        this.panelCentre.setBorder(new MatteBorder(0, 0, 2, 0, couleur));
-        mainPanel.add(this.panelCentre, BorderLayout.CENTER);
-        
-        panelCentre.add(new JLabel ("Position", SwingConstants.CENTER));
-        position = new  JTextField(30); 
-        position.setHorizontalAlignment(CENTER);
-        panelCentre.add(position);
+        assecher.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "assecher";
+                    m.assecher = (String) assecher2.getSelectedItem();
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
+        carteHeli.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "carteHeli";
+                    m.carteHeli = (String) carteHeli2.getSelectedItem();
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        // =================================================================================
-        // SUD : les boutons
-        this.panelBoutons = new JPanel(new GridLayout(2,2));
-        this.panelBoutons.setOpaque(false);
-        mainPanel.add(this.panelBoutons, BorderLayout.SOUTH);
+        carteSac.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "carteSac";
+                    m.carteSac = (String) carteSac2.getSelectedItem();
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        this.btnBouger = new JButton("Se déplacer") ;
-        this.btnAssecher = new JButton( "Assecher");
-        this.btnAutreAction = new JButton("AutreAction") ;
-        this.btnTerminerTour = new JButton("Terminer Tour") ;
-        
-        this.panelBoutons.add(btnBouger);
-        this.panelBoutons.add(btnAssecher);
-        this.panelBoutons.add(btnAutreAction);
-        this.panelBoutons.add(btnTerminerTour);
+        prendre.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Message m = new Message();
+                    m.action = "prendre";
+                    m.type = TypesMessage.JOUER_COUP;
+                    notifierObservateur(m);
+                }
+        });
 
-        this.window.setVisible(true);
-    } 
-    
-    public void setPosition(String pos) {
-        this.position.setText(pos);
+        for(Tuile t : c.tuilepossibledep(av)){
+            seDeplacer.addItem(t);
+        }
+
+         for(Tuile t : c.tuileassechable(av)){
+            assecher2.addItem(t);
+        }
+
+        fenetre.setLayout(new BorderLayout());
+        panelH = new JPanel();
+        panelH.add(etatJeu);
+        fenetre.add(panelH, BorderLayout.NORTH);
+
+        panelB = new JPanel();
+        panelB.setLayout(new GridLayout(7, 3));
+        panelB.add(voirCartes);
+        panelB.add(new JLabel(""));
+        panelB.add(prendre);
+        panelB.add(seDeplacer2);
+        panelB.add(new JLabel("Choix :"));
+        panelB.add(seDeplacer);
+        panelB.add(donner);
+        panelB.add(new JLabel("Choix :"));
+        panelB.add(donner2);
+        panelB.add(assecher);
+        panelB.add(new JLabel("Choix :"));
+        panelB.add(assecher2);
+        panelB.add(carteHeli);
+        panelB.add(new JLabel("Choix :"));
+        panelB.add(carteHeli2);
+        panelB.add(carteSac);
+        panelB.add(new JLabel("Choix :"));
+        panelB.add(carteSac2);
+        panelB.add(new JLabel(""));
+        panelB.add(passerTour);
+        panelB.add(new JLabel(""));
+
+        fenetre.add(panelB,BorderLayout.CENTER);
+
     }
-    
-     public JButton getBtnAutreAction() {
-        return btnAutreAction;
-    }
-    
-    public String getPosition() {
-        return position.getText();
+
+    public void afficherEtatAction(int etat, String joueur) {
+        switch(etat) {
+            case ETAT_ACTION:
+                etatJeu.setText("Joueur " + joueur + " choisir une action");
+                break;
+
+            case ETAT_GAGNANT:
+                etatJeu.setText("Jeu terminé : " + joueur + " gagnant");
+                break;
+        }
     }
 
-    public JButton getBtnBouger() {
-        return btnBouger;
-    }
-    
-    public JButton getBtnAssecher() {
-        return btnAssecher;
+    private void configureWindow(JFrame window) {
+        window.setSize(500, 200);
+        window.getContentPane().setLayout(new java.awt.BorderLayout());
+        window.setDefaultCloseOperation(javax.swing.JFrame.DO_NOTHING_ON_CLOSE);
+        window.addWindowListener(new java.awt.event.WindowListener() {
+            public void windowOpened(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowClosed(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowIconified(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowDeiconified(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowActivated(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowDeactivated(java.awt.event.WindowEvent e) {
+            }
+
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
-    public JButton getBtnTerminerTour() {
-        return btnTerminerTour;
+    public void afficher() {
+        fenetre.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        fenetre.setSize(720, 1080);
+        fenetre.setVisible(true);
     }
- 
-     public static void main(String [] args) {
-        // Instanciation de la fenêtre 
-        VueAventurier vueAventurier = new VueAventurier("Manon", "Explorateur",Color.RED );
+
+    public void actualiser(Controleur c ,Aventurier av){
+
     }
+
 }
-
- 
-

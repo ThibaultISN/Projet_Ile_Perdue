@@ -23,6 +23,11 @@ La Porte de
 
     }
 
+    @Override
+    public String toString() {
+        return this.getNom()+ "|| position : (" + this.position.getX() +","+ this.position.getY()+") " +"\n etat : " + this.etatTuile ;
+    }
+    
     public Tuile(String nom, Position position) { //Pour les tuiles non nul
         setNom(nom);
 
