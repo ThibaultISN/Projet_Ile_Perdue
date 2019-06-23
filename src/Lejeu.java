@@ -26,6 +26,9 @@ public class Lejeu {
         controleur.initterrain();
         controleur.defosse= new ArrayList<>();
         controleur.defossecartinond = new ArrayList<>();
+        
+        
+        
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Veuillez saisir le nombre de joeur ( entre 2 et 4 )");
@@ -146,7 +149,7 @@ public class Lejeu {
 
         controleur.setCartesinnond(controleur.Carteterraingen());
         controleur.initterrain();
-
+        
         /* verif  System.out.println("===================================");
         controleur.affichegrille();
          System.out.println("===================================");
@@ -190,7 +193,8 @@ public class Lejeu {
 
         }*/
         controleur.affichegrille();
-
+       
+       // vg.setG(controleur.grille); vg.getWindow().setVisible(true);
         System.out.println("LA PARTIE VA DEBUTE");
         System.out.println(controleur.getJoueurs().size());
 
@@ -465,8 +469,8 @@ public class Lejeu {
                             break;
                         case 7:
                             if (av.getEmplacement().getTrésor() != null) {
-                                if (controleur.Possibleprisetrésor(av, av.getEmplacement().getTrésor())) {
-                                    controleur.prendretresor(av, av.getEmplacement().getTrésor());
+                                if (controleur.Possibleprisetrésor(av)) {
+                                    controleur.prendretresor(av);
                                     System.out.println("Felicitation vous avez le pris le tresor"
                                             + " " + av.getEmplacement().getTrésor().getNom());
                                     nbaction = nbaction + 1;
